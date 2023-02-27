@@ -31,15 +31,26 @@ img {
 }
 
 .topnav {
+  display: flex;
+  justify-content: space-between;
   overflow: hidden;
-  margin: 3.5%;
+  margin:3.5% 20px;
+  padding: 0 2vw;
 }
+/*TODO : header*/
+
 .header-logo {
-  float: left;
+  height: 45px;
+  flex-shrink: 0;
 }
-.main-navbar {
-  float: right;
+
+.header-logo > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
+
 .topnav a {
   float: left;
   display: block;
@@ -97,11 +108,6 @@ img {
 @media screen and (max-width: 540px) {
   .topnav a {
     display: none;
-  }
-  .topnav a.icon {
-    float: right;
-    display: block;
-    margin-top: -15px;
   }
 }
 
