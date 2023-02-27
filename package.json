@@ -1,0 +1,24 @@
+{
+  "name": "rog_4_022023",
+  "version": "1.0.0",
+  "description": "1. Fork du repository fourni dans les spécifications du projet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OgdenRichard/rog_4_022023.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OgdenRichard/rog_4_022023/issues"
+  },
+  "homepage": "https://github.com/OgdenRichard/rog_4_022023#readme",
+  "devDependencies": {
+    "eslint": "^8.35.0",
+    "prettier": "^2.8.4"
+  }
+}
