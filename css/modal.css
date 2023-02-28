@@ -34,7 +34,7 @@ img {
   display: flex;
   justify-content: space-between;
   overflow: hidden;
-  margin:3.5% 20px;
+  margin: 3.5% 20px;
   padding: 0 2vw;
 }
 /*TODO : header*/
@@ -42,6 +42,7 @@ img {
 .header-logo {
   height: 45px;
   flex-shrink: 0;
+  margin-right: 0.75em;
 }
 
 .header-logo > img {
@@ -51,9 +52,14 @@ img {
   object-fit: contain;
 }
 
+.main-navbar {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
 .topnav a {
-  float: left;
-  display: block;
+  display: inline-block;
   color: #000000;
   text-align: center;
   padding: 12px 12px;
@@ -87,9 +93,7 @@ img {
     float: right;
     display: block;
   }
-}
 
-@media screen and (max-width: 768px) {
   .topnav.responsive {
     position: relative;
   }
@@ -102,6 +106,10 @@ img {
     float: none;
     display: block;
     text-align: left;
+  }
+
+  .main-navbar {
+    flex-direction: column;
   }
 }
 
@@ -497,7 +505,13 @@ footer {
   }
 }
 
-@media screen and (max-width: 800px) {
+@media only screen and (768px< width <800px) {
+  .main-navbar > a {
+    font-size: 2.5vw;
+  }
+}
+
+@media only screen and (max-width: 800px) {
   .hero-section {
     display: block;
     box-shadow: unset;
