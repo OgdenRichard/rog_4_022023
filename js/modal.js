@@ -11,6 +11,7 @@ function editNav() {
 const navbarBtn = document.querySelector('#navbar-menu');
 const modalbg = document.querySelector('.bground');
 const modalBtn = document.querySelectorAll('.modal-btn');
+const inputVals = document.querySelectorAll('.text-control');
 const modalForm = document.getElementById('reserve');
 const modalCloseBtn = document.querySelectorAll('.close');
 const formData = document.querySelectorAll('.formData');
@@ -28,10 +29,17 @@ function closeModal() {
   modalbg.style.display = 'none';
 }
 
+function checkUserData() {
+  inputVals.forEach((data) => {
+    data.addEventListener('keyup', () => {
+      console.log(data.value);
+    });
+  });
+}
+
 function validateForm() {
   modalForm.addEventListener('submit', (event) => {
     event.preventDefault();
-    console.log('yo');
     // process data and submit a request manually
   });
 }
@@ -53,4 +61,5 @@ document.addEventListener('keydown', ({ key }) => {
   }
 });
 
+checkUserData();
 validateForm();
