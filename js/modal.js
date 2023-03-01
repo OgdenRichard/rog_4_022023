@@ -11,7 +11,8 @@ function editNav() {
 const navbarBtn = document.querySelector('#navbar-menu');
 const modalbg = document.querySelector('.bground');
 const modalBtn = document.querySelectorAll('.modal-btn');
-const inputVals = document.querySelectorAll('.text-control');
+const textInputVals = document.querySelectorAll('.text-control');
+const locationVals = document.getElementsByName('location');
 const modalForm = document.getElementById('reserve');
 const modalCloseBtn = document.querySelectorAll('.close');
 const formData = document.querySelectorAll('.formData');
@@ -30,7 +31,7 @@ function closeModal() {
 }
 
 function checkUserData() {
-  inputVals.forEach((data) => {
+  textInputVals.forEach((data) => {
     data.addEventListener('keyup', () => {
       console.log(data.value);
     });
@@ -40,7 +41,15 @@ function checkUserData() {
 function validateForm() {
   modalForm.addEventListener('submit', (event) => {
     event.preventDefault();
-    // process data and submit a request manually
+    textInputVals.forEach((data) => {
+      // todo : check text value
+      console.log(data.value);
+    });
+    locationVals.forEach((location) => {
+      if (location.checked) {
+        console.log(location.value);
+      }
+    });
   });
 }
 
@@ -61,5 +70,5 @@ document.addEventListener('keydown', ({ key }) => {
   }
 });
 
-checkUserData();
+//checkUserData();
 validateForm();
