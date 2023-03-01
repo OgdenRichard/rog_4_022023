@@ -11,6 +11,7 @@ function editNav() {
 const navbarBtn = document.querySelector('#navbar-menu');
 const modalbg = document.querySelector('.bground');
 const modalBtn = document.querySelectorAll('.modal-btn');
+const modalForm = document.getElementById('reserve');
 const modalCloseBtn = document.querySelectorAll('.close');
 const formData = document.querySelectorAll('.formData');
 
@@ -27,17 +28,29 @@ function closeModal() {
   modalbg.style.display = 'none';
 }
 
+function validateForm() {
+  modalForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    console.log('yo');
+    // process data and submit a request manually
+  });
+}
+
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener('click', launchModal));
 
 // close modal
-modalCloseBtn.forEach((btn) => btn.addEventListener('click', () => {
-  modalbg.style.display = 'none';
-}));
+modalCloseBtn.forEach((btn) =>
+  btn.addEventListener('click', () => {
+    modalbg.style.display = 'none';
+  })
+);
 
 // close modal on keypress esc
-document.addEventListener("keydown", ({key}) => {
-  if (key === "Escape"){
+document.addEventListener('keydown', ({ key }) => {
+  if (key === 'Escape') {
     modalbg.style.display = 'none';
-  } 
+  }
 });
+
+validateForm();
