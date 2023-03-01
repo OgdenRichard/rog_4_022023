@@ -38,16 +38,48 @@ function checkUserData() {
   });
 }
 
+// TODO function checkNames
+// TODO function checkMail
+// TODO function checkDate
+// TODO function checkNumber
+// TODO function checkLocation
+// TODO function setErrorDisplay
+
+// TODO gérer local storage
+// TODO JS Doc
+
 function validateForm() {
   modalForm.addEventListener('submit', (event) => {
     event.preventDefault();
     textInputVals.forEach((data) => {
-      // todo : check text value
-      console.log(data.value);
+      switch (data.type) {
+        case 'text':
+          console.log('champs de type texte');
+          console.log(data);
+          break;
+        case 'email':
+          console.log('champs de type email');
+          break;
+        case 'date':
+          console.log('champs de type date');
+          break;
+        case 'number':
+          console.log('champs de type number');
+          break;
+        default:
+          console.log('champs de type inconnu ou type non précisé');
+      }
+      /* if (data.type === 'number' || data.type === 'date') {
+        !data.value ? console.log('empty') : console.log(data.value);
+      } else {
+        console.log(data.value);
+      } */
     });
     locationVals.forEach((location) => {
       if (location.checked) {
         console.log(location.value);
+      } else {
+        console.log('Location not selected');
       }
     });
   });
