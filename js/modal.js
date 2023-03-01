@@ -7,14 +7,7 @@ function editNav() {
   }
 }
 
-function reportWindowSize() {
-  console.log(window.innerWidth);
-}
-
-window.onresize = reportWindowSize;
-
 // DOM Elements
-const windowWidth = window.innerWidth;
 const navbarBtn = document.querySelector('#navbar-menu');
 const modalbg = document.querySelector('.bground');
 const modalBtn = document.querySelectorAll('.modal-btn');
