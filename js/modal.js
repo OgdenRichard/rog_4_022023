@@ -44,13 +44,29 @@ function checkUserData() {
 }
 
 function checkInputVal(inputVal, pattern) {
-  let nameCheck = new RegExp(pattern);
-  return nameCheck.test(inputVal);
+  return pattern.test(inputVal);
 }
 
-// TODO function checkDate
+function checkDate(strDate) {
+  const inputDate = new Date(strDate);
+  const todayDate = new Date();
+  if (!isNaN(inputDate.getTime()) && todayDate > inputDate) {
+    const datesDiff = new Date(todayDate - inputDate);
+    return datesDiff.getUTCFullYear() - 1970;
+  } // undefined otherwise
+}
+
+function checkAge(ageVal) {
+  // handle error message here
+  if (ageVal) {
+    return ageVal > 7 && ageVal < 77;
+  }
+  return 'prout';
+}
 // TODO function checkNumber
+
 // TODO function checkLocation
+
 // TODO function setErrorDisplay
 
 // TODO gérer local storage
@@ -62,13 +78,22 @@ function validateForm() {
     formTextInputs.forEach((input) => {
       switch (input.type) {
         case 'text':
-          console.log(`champs de type ${input.name} name : ${checkInputVal(input.value, namesPattern)}`);
+          console.log(
+            `champs de type ${input.name} name : ${checkInputVal(
+              input.value,
+              namesPattern
+            )}`
+          );
           break;
         case 'email':
-          console.log(`champs de type email : ${checkInputVal(input.value, emailPattern)}`);
+          console.log(
+            `champs de type email : ${checkInputVal(input.value, emailPattern)}`
+          );
           break;
         case 'date':
-          console.log('champs de type date');
+          console.log(
+            `champs de type date : ${checkAge(checkDate(input.value))}`
+          );
           break;
         case 'number':
           console.log('champs de type number');
