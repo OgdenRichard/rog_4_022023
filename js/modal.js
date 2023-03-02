@@ -11,7 +11,7 @@ function editNav() {
 const navbarBtn = document.querySelector('#navbar-menu');
 const modalbg = document.querySelector('.bground');
 const modalBtn = document.querySelectorAll('.modal-btn');
-const textInputVals = document.querySelectorAll('.text-control');
+const formTextInputs = document.querySelectorAll('.text-control');
 const locationVals = document.getElementsByName('location');
 const modalForm = document.getElementById('reserve');
 const modalCloseBtn = document.querySelectorAll('.close');
@@ -31,7 +31,7 @@ function closeModal() {
 }
 
 function checkUserData() {
-  textInputVals.forEach((data) => {
+  formTextInputs.forEach((data) => {
     data.addEventListener('keyup', () => {
       console.log(data.value);
     });
@@ -39,6 +39,12 @@ function checkUserData() {
 }
 
 // TODO function checkNames
+function checkNames(inputVal) {
+  let pattern =
+    "^(?=.{2,40}$)([A-Za-zÀ-ÖØ-öø-ÿ]{2,})+(?:[-'s][A-Za-zÀ-ÖØ-öø-ÿ]+)*$";
+  let nameCheck = new RegExp(pattern);
+  return nameCheck.test(inputVal);
+}
 // TODO function checkMail
 // TODO function checkDate
 // TODO function checkNumber
@@ -51,11 +57,11 @@ function checkUserData() {
 function validateForm() {
   modalForm.addEventListener('submit', (event) => {
     event.preventDefault();
-    textInputVals.forEach((data) => {
-      switch (data.type) {
+    formTextInputs.forEach((input) => {
+      switch (input.type) {
         case 'text':
           console.log('champs de type texte');
-          console.log(data);
+          console.log(checkNames(input.value));
           break;
         case 'email':
           console.log('champs de type email');
