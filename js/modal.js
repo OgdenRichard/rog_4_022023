@@ -17,6 +17,11 @@ const modalForm = document.getElementById('reserve');
 const modalCloseBtn = document.querySelectorAll('.close');
 const formData = document.querySelectorAll('.formData');
 
+// regex patterns
+const namesPattern =
+  /^(?=.{2,40}$)([A-Za-zÀ-ÖØ-öø-ÿ])+(?:[-'\s][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
+const emailPattern = '';
+
 // launch navbar menu
 navbarBtn.addEventListener('click', editNav);
 
@@ -38,10 +43,7 @@ function checkUserData() {
   });
 }
 
-// TODO function checkNames
-function checkNames(inputVal) {
-  let pattern =
-    "^(?=.{2,40}$)([A-Za-zÀ-ÖØ-öø-ÿ]{2,})+(?:[-'s][A-Za-zÀ-ÖØ-öø-ÿ]+)*$";
+function checkInputVal(inputVal, pattern) {
   let nameCheck = new RegExp(pattern);
   return nameCheck.test(inputVal);
 }
@@ -61,7 +63,7 @@ function validateForm() {
       switch (input.type) {
         case 'text':
           console.log('champs de type texte');
-          console.log(checkNames(input.value));
+          console.log(checkInputVal(input.value, namesPattern));
           break;
         case 'email':
           console.log('champs de type email');
