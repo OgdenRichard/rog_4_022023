@@ -53,7 +53,7 @@ function checkDate(strDate) {
   if (!isNaN(inputDate.getTime()) && todayDate > inputDate) {
     const datesDiff = new Date(todayDate - inputDate);
     return datesDiff.getUTCFullYear() - 1970;
-  } // undefined otherwise
+  }
 }
 
 function checkAge(ageVal) {
@@ -63,7 +63,29 @@ function checkAge(ageVal) {
   }
   return 'prout';
 }
-// TODO function checkNumber
+// TODO appeler les méthodes de vérif de dates dans une méthode et gérer l'affichage du message
+// saisir une date, saisir une date antérieure à la date du jour / tournoi ouvert de 7 à 77 ans
+
+function checkNbOfTournaments(strNumber) {
+  // TODO function isNaN
+  return parseInt(strNumber, 10);
+}
+
+function displayErrorHighlight(input) {
+  input.parentNode.setAttribute('data-error-visible', 'true');
+  // switch/case again
+  // dissocier valeur incorrecte vs/empty?
+}
+
+function displayValidHighLight(input) {
+  input.parentNode.setAttribute('data-valid-field', 'true');
+}
+
+function displayErrorMessage() {}
+
+function validateInput(input) {
+  //border effect
+}
 
 // TODO function checkLocation
 
@@ -76,8 +98,15 @@ function validateForm() {
   modalForm.addEventListener('submit', (event) => {
     event.preventDefault();
     formTextInputs.forEach((input) => {
+      input.addEventListener('keyup', () => {
+        input.parentNode.removeAttribute('data-error-visible');
+      });
       switch (input.type) {
         case 'text':
+          checkInputVal(input.value, namesPattern)
+            ? displayValidHighLight(input)
+            : displayErrorHighlight(input);
+
           console.log(
             `champs de type ${input.name} name : ${checkInputVal(
               input.value,
@@ -96,7 +125,9 @@ function validateForm() {
           );
           break;
         case 'number':
-          console.log('champs de type number');
+          console.log(
+            `champs de type number : ${checkNbOfTournaments(input.value)}`
+          );
           break;
         default:
           console.log('champs de type inconnu ou type non précisé');
