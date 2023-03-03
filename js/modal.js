@@ -73,6 +73,7 @@ function checkNbOfTournaments(strNumber) {
 
 function displayErrorHighlight(input) {
   input.parentNode.setAttribute('data-error-visible', 'true');
+  input.parentNode.setAttribute('data-error', 'nooooooooooon');
   // switch/case again
   // dissocier valeur incorrecte vs/empty?
 }
@@ -139,6 +140,7 @@ function validateForm() {
       } */
     });
     locationVals.forEach((location) => {
+      // TODO : counter
       if (location.checked) {
         console.log(location.value);
       } else {
