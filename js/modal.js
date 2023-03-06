@@ -159,11 +159,11 @@ class FormDisplay {
 const FormController = () => {
   const testo = new FormDisplay();
   // open modal
-  modalBtn.forEach((btn) =>
+ /*  modalBtn.forEach((btn) =>
     btn.addEventListener('click', () => {
       modalbg.style.display = 'block';
     })
-  );
+  ); */
   // close modal
   modalCloseBtn.forEach((btn) =>
     btn.addEventListener('click', () => {
@@ -187,6 +187,7 @@ const FormController = () => {
 
 FormController();
 const fW = new FormView();
+fW.openForm();
 fW.bindSubmitForm(validateForm);
 //checkUserData();
 //validateForm();
