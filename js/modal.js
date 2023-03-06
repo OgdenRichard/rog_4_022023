@@ -1,3 +1,6 @@
+/* eslint-disable import/extensions */
+import FormView from './modalview.js';
+
 function editNav() {
   const x = document.getElementById('myTopnav');
   if (x.className === 'topnav') {
@@ -71,10 +74,6 @@ function checkEmptyTextField(input) {
   }
 }
 
-function validateInput(input) {
-  //border effect
-}
-
 // TODO function checkLocation
 
 // TODO function setErrorDisplay
@@ -85,48 +84,49 @@ function validateInput(input) {
 function validateForm() {
   modalForm.addEventListener('submit', (event) => {
     event.preventDefault();
-    formTextInputs.forEach((input) => {
-      // TODO : checkempty here
-      switch (input.type) {
+    const fw = new FormView();
+    for (let i = 0, len = fw.formTextInputs.length; i < len; i += 1) {
+      switch (fw.formTextInputs[i].type) {
         case 'text':
-          // TODO : une seule méthode highlight
-          FormDisplay.displayHighLight(
-            input,
-            checkInputVal(input.value, namesPattern),
+          fw.displayHighLight(
+            i,
+            checkInputVal(fw.formTextInputs[i].value, namesPattern),
             'oh nooooooooooo'
           );
           console.log(
-            `champs de type ${input.name} name : ${checkInputVal(
-              input.value,
+            `champs de type ${fw.formTextInputs[i].name} name : ${checkInputVal(
+              fw.formTextInputs[i].value,
               namesPattern
             )}`
           );
           break;
         case 'email':
           console.log(
-            `champs de type email : ${checkInputVal(input.value, emailPattern)}`
+            `champs de type email : ${checkInputVal(
+              fw.formTextInputs[i].value,
+              emailPattern
+            )}`
           );
           break;
         case 'date':
           console.log(
-            `champs de type date : ${checkAge(checkDate(input.value))}`
+            `champs de type date : ${checkAge(
+              checkDate(fw.formTextInputs[i].value)
+            )}`
           );
           break;
         case 'number':
           console.log(
-            `champs de type number : ${checkNbOfTournaments(input.value)}`
+            `champs de type number : ${checkNbOfTournaments(
+              fw.formTextInputs[i].value
+            )}`
           );
-          console.log(input.value.length);
+          console.log(fw.formTextInputs[i].value.length);
           break;
         default:
           console.log('champs de type inconnu ou type non précisé');
       }
-      /* if (data.type === 'number' || data.type === 'date') {
-        !data.value ? console.log('empty') : console.log(data.value);
-      } else {
-        console.log(data.value);
-      } */
-    });
+    }
     locationVals.forEach((location) => {
       // TODO : counter
       if (location.checked) {
@@ -160,6 +160,7 @@ class FormDisplay {
 }
 
 const FormController = () => {
+  const testo = new FormDisplay();
   // open modal
   modalBtn.forEach((btn) =>
     btn.addEventListener('click', () => {
