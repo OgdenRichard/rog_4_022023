@@ -25,16 +25,6 @@ const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 // launch navbar menu
 navbarBtn.addEventListener('click', editNav);
 
-// launch modal form
-function launchModal() {
-  modalbg.style.display = 'block';
-}
-
-// close modal form
-function closeModal() {
-  modalbg.style.display = 'none';
-}
-
 function checkUserData() {
   formTextInputs.forEach((data) => {
     data.addEventListener('keyup', () => {
@@ -105,9 +95,6 @@ function validateForm() {
   modalForm.addEventListener('submit', (event) => {
     event.preventDefault();
     formTextInputs.forEach((input) => {
-      input.addEventListener('keyup', () => {
-        input.parentNode.removeAttribute('data-error-visible');
-      });
       switch (input.type) {
         case 'text':
           // TODO : checkempty
@@ -159,22 +146,33 @@ function validateForm() {
   });
 }
 
-// launch modal event
-modalBtn.forEach((btn) => btn.addEventListener('click', launchModal));
+function controlModalForm() {
+  // open modal
+  modalBtn.forEach((btn) =>
+    btn.addEventListener('click', () => {
+      modalbg.style.display = 'block';
+    })
+  );
+  // close modal
+  modalCloseBtn.forEach((btn) =>
+    btn.addEventListener('click', () => {
+      modalbg.style.display = 'none';
+    })
+  );
+  // close modal on keypress esc
+  document.addEventListener('keydown', ({ key }) => {
+    if (key === 'Escape') {
+      modalbg.style.display = 'none';
+    }
+  });
+  // reset data attribute on user action
+  formTextInputs.forEach((input) => {
+    input.addEventListener('keyup', () => {
+      input.parentNode.removeAttribute('data-error-visible');
+    });
+  });
+}
 
-// close modal
-modalCloseBtn.forEach((btn) =>
-  btn.addEventListener('click', () => {
-    modalbg.style.display = 'none';
-  })
-);
-
-// close modal on keypress esc
-document.addEventListener('keydown', ({ key }) => {
-  if (key === 'Escape') {
-    modalbg.style.display = 'none';
-  }
-});
-
+controlModalForm();
 //checkUserData();
 validateForm();
