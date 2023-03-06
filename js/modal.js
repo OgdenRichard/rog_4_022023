@@ -61,13 +61,6 @@ function checkNbOfTournaments(strNumber) {
   return parseInt(strNumber, 10);
 }
 
-function displayErrorHighlight(input) {
-  input.parentNode.setAttribute('data-error-visible', 'true');
-  input.parentNode.setAttribute('data-error', 'nooooooooooon');
-  // switch/case again
-  // dissocier valeur incorrecte vs/empty?
-}
-
 function displayValidHighLight(input) {
   input.parentNode.setAttribute('data-error-visible', 'false');
 }
@@ -77,8 +70,6 @@ function checkEmptyTextField(input) {
     return input.value.length;
   }
 }
-
-function displayErrorMessage() {}
 
 function validateInput(input) {
   //border effect
@@ -95,14 +86,15 @@ function validateForm() {
   modalForm.addEventListener('submit', (event) => {
     event.preventDefault();
     formTextInputs.forEach((input) => {
+      // TODO : checkempty here
       switch (input.type) {
         case 'text':
-          // TODO : checkempty
           // TODO : une seule méthode highlight
-          checkInputVal(input.value, namesPattern)
-            ? displayValidHighLight(input)
-            : displayErrorHighlight(input);
-
+          FormDisplay.displayHighLight(
+            input,
+            checkInputVal(input.value, namesPattern),
+            'oh nooooooooooo'
+          );
           console.log(
             `champs de type ${input.name} name : ${checkInputVal(
               input.value,
@@ -146,6 +138,27 @@ function validateForm() {
   });
 }
 
+class FormDisplay {
+  // set data elements
+  static displayHighLight = (input, isValid, message) => {
+    const errorous = !isValid;
+    input.parentNode.setAttribute('data-error-visible', `${errorous}`);
+    if (errorous) {
+      input.parentNode.setAttribute('data-error', message);
+    }
+  };
+
+  // remove data element
+  static removeDataError = (input) => {
+    input.parentNode.removeAttribute('data-error-visible');
+  };
+
+  // display message
+  static displayErrorMessage = (input, message) => {
+    input.parentNode.setAttribute('data-error', message);
+  };
+}
+
 const FormController = () => {
   // open modal
   modalBtn.forEach((btn) =>
@@ -168,7 +181,8 @@ const FormController = () => {
   // reset data attribute on user action
   formTextInputs.forEach((input) => {
     input.addEventListener('keyup', () => {
-      input.parentNode.removeAttribute('data-error-visible');
+      FormDisplay.removeDataError(input);
+      // input.parentNode.removeAttribute('data-error-visible');
     });
   });
 };
