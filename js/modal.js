@@ -82,59 +82,56 @@ function checkEmptyTextField(input) {
 // TODO JS Doc
 
 function validateForm() {
-  modalForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const fw = new FormView();
-    for (let i = 0, len = fw.formTextInputs.length; i < len; i += 1) {
-      switch (fw.formTextInputs[i].type) {
-        case 'text':
-          fw.displayHighLight(
-            i,
-            checkInputVal(fw.formTextInputs[i].value, namesPattern),
-            'oh nooooooooooo'
-          );
-          console.log(
-            `champs de type ${fw.formTextInputs[i].name} name : ${checkInputVal(
-              fw.formTextInputs[i].value,
-              namesPattern
-            )}`
-          );
-          break;
-        case 'email':
-          console.log(
-            `champs de type email : ${checkInputVal(
-              fw.formTextInputs[i].value,
-              emailPattern
-            )}`
-          );
-          break;
-        case 'date':
-          console.log(
-            `champs de type date : ${checkAge(
-              checkDate(fw.formTextInputs[i].value)
-            )}`
-          );
-          break;
-        case 'number':
-          console.log(
-            `champs de type number : ${checkNbOfTournaments(
-              fw.formTextInputs[i].value
-            )}`
-          );
-          console.log(fw.formTextInputs[i].value.length);
-          break;
-        default:
-          console.log('champs de type inconnu ou type non précisé');
-      }
+  for (let i = 0, len = formTextInputs.length; i < len; i += 1) {
+    switch (formTextInputs[i].type) {
+      case 'text':
+        // TODO : extraire fW?
+        fW.displayHighLight(
+          i,
+          checkInputVal(formTextInputs[i].value, namesPattern),
+          'oh nooooooooooo'
+        );
+        console.log(
+          `champs de type ${formTextInputs[i].name} name : ${checkInputVal(
+            formTextInputs[i].value,
+            namesPattern
+          )}`
+        );
+        break;
+      case 'email':
+        console.log(
+          `champs de type email : ${checkInputVal(
+            formTextInputs[i].value,
+            emailPattern
+          )}`
+        );
+        break;
+      case 'date':
+        console.log(
+          `champs de type date : ${checkAge(
+            checkDate(formTextInputs[i].value)
+          )}`
+        );
+        break;
+      case 'number':
+        console.log(
+          `champs de type number : ${checkNbOfTournaments(
+            formTextInputs[i].value
+          )}`
+        );
+        console.log(formTextInputs[i].value.length);
+        break;
+      default:
+        console.log('champs de type inconnu ou type non précisé');
     }
-    locationVals.forEach((location) => {
-      // TODO : counter
-      if (location.checked) {
-        console.log(location.value);
-      } else {
-        console.log('Location not selected');
-      }
-    });
+  }
+  locationVals.forEach((location) => {
+    // TODO : counter
+    if (location.checked) {
+      console.log(location.value);
+    } else {
+      console.log('Location not selected');
+    }
   });
 }
 
@@ -189,5 +186,7 @@ const FormController = () => {
 };
 
 FormController();
+const fW = new FormView();
+fW.bindSubmitForm(validateForm);
 //checkUserData();
-validateForm();
+//validateForm();

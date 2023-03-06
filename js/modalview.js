@@ -14,6 +14,13 @@ export default class FormView {
     );
   };
 
+  bindSubmitForm = (handler) => {
+    this.modalForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      handler(this.formTextInputs);
+    });
+  };
+
   displayHighLight = (index, isValid, message) => {
     const errorous = !isValid;
     this.formTextInputs[index].parentNode.setAttribute(
