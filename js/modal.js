@@ -146,7 +146,7 @@ function validateForm() {
   });
 }
 
-function controlModalForm() {
+const FormController = () => {
   // open modal
   modalBtn.forEach((btn) =>
     btn.addEventListener('click', () => {
@@ -171,8 +171,8 @@ function controlModalForm() {
       input.parentNode.removeAttribute('data-error-visible');
     });
   });
-}
+};
 
-controlModalForm();
+FormController();
 //checkUserData();
 validateForm();
