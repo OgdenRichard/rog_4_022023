@@ -61,8 +61,8 @@ function checkAge(ageVal) {
   if (ageVal) {
     return ageVal > 7 && ageVal < 77;
   }
-  return 'prout';
 }
+
 // TODO appeler les méthodes de vérif de dates dans une méthode et gérer l'affichage du message
 // saisir une date, saisir une date antérieure à la date du jour / tournoi ouvert de 7 à 77 ans
 
@@ -79,7 +79,13 @@ function displayErrorHighlight(input) {
 }
 
 function displayValidHighLight(input) {
-  input.parentNode.setAttribute('data-valid-field', 'true');
+  input.parentNode.setAttribute('data-error-visible', 'false');
+}
+
+function checkEmptyTextField(input) {
+  if (input.type !== 'number') {
+    return input.value.length;
+  }
 }
 
 function displayErrorMessage() {}
@@ -104,6 +110,8 @@ function validateForm() {
       });
       switch (input.type) {
         case 'text':
+          // TODO : checkempty
+          // TODO : une seule méthode highlight
           checkInputVal(input.value, namesPattern)
             ? displayValidHighLight(input)
             : displayErrorHighlight(input);
@@ -129,6 +137,7 @@ function validateForm() {
           console.log(
             `champs de type number : ${checkNbOfTournaments(input.value)}`
           );
+          console.log(input.value.length);
           break;
         default:
           console.log('champs de type inconnu ou type non précisé');
