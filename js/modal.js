@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions */
-import FormView from './modalview.js';
+import FormView from './formview.js';
+import FormModel from './formmodel.js';
 
 function editNav() {
   const x = document.getElementById('myTopnav');
@@ -157,7 +158,7 @@ class FormDisplay {
 }
 
 const FormController = () => {
-  const testo = new FormDisplay();
+  console.log(formData[0]);
   // open modal
  /*  modalBtn.forEach((btn) =>
     btn.addEventListener('click', () => {
