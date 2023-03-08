@@ -1,6 +1,7 @@
 /* eslint-disable import/extensions */
 import FormView from './formview.js';
 import FormModel from './formmodel.js';
+import FormController from './formcontroller.js';
 
 function editNav() {
   const x = document.getElementById('myTopnav');
@@ -157,7 +158,7 @@ class FormDisplay {
   };
 }
 
-const FormController = () => {
+const Form_Controller = () => {
   console.log(formData[0]);
   // open modal
  /*  modalBtn.forEach((btn) =>
@@ -186,9 +187,11 @@ const FormController = () => {
   });
 };
 
-FormController();
+/* FormController();
 const fW = new FormView();
 fW.openForm();
-fW.bindSubmitForm(validateForm);
+fW.bindSubmitForm(validateForm); */
+const fC = new FormController();
+fC.runForm();
 //checkUserData();
 //validateForm();

@@ -21,6 +21,15 @@ export default class FormView {
     });
   };
 
+  displayInputStatus = (input, status) => {
+    if (input) {
+      input.parentNode.setAttribute('data-error-visible', `${!status.isValid}`);
+      if (!status.isValid) {
+        input.parentNode.setAttribute('data-error', status.message);
+      }
+    }
+  };
+
   displayHighLight = (index, isValid, message) => {
     const errorous = !isValid;
     this.formTextInputs[index].parentNode.setAttribute(

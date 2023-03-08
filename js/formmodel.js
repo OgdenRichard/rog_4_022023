@@ -3,12 +3,18 @@ export default class FormModel {
     this.namesPattern =
       /^(?=.{2,40}$)([A-Za-zÀ-ÖØ-öø-ÿ])+(?:[-'\s][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
     this.emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    this.inputValues = [];
+    this.inputValuesStatus = [];
+    this.currentInput = null;
+    this.currentInputStatus = null;
   }
 
-  checkFirstName = (inputVal) => this.namesPattern.test(inputVal);
+  bindNewInputStatus(callback) {
+    this.onNewInputStatus = callback;
+  }
 
-  checkEmail = (inputVal) => this.emailPattern.test(inputVal);
+  checkFirstName = (inputStatus) => this.namesPattern.test(inputStatus);
+
+  checkEmail = (inputStatus) => this.emailPattern.test(inputStatus);
 
   checkNbOfTournaments = (strNumber) => parseInt(strNumber, 10);
 
@@ -28,39 +34,28 @@ export default class FormModel {
     }
   };
 
-  addInputValue = (input) => {
-    const inputVal = { id: input.id, valid: false };
-    switch (input.type) {
-      case 'text':
-        inputVal.valid = this.checkFirstName(input.value);
-        console.log(
-          `champs de type ${input.name} name : ${checkInputVal(
-            input.value,
-            namesPattern
-          )}`
-        );
-        break;
-      case 'email':
-        inputVal.valid = this.checkEmail(input.value);
-        console.log(
-          `champs de type email : ${checkInputVal(input.value, emailPattern)}`
-        );
-        break;
-      case 'date':
-        inputVal.valid = this.checkDate(input.value);
-        console.log(
-          `champs de type date : ${checkAge(checkDate(input.value))}`
-        );
-        break;
-      case 'number':
-        inputVal.valid = this.checkNbOfTournaments(input.value);
-        console.log(
-          `champs de type number : ${checkNbOfTournaments(input.value)}`
-        );
-        console.log(input.value.length);
-        break;
-      default:
-        console.log('champs de type inconnu ou type non précisé');
-    }
+  addinputStatus = (textInputs) => {
+    this.inputValuesStatus = [];
+    textInputs.forEach((input) => {
+      const inputStatus = { id: input.id, isValid: false };
+      switch (input.type) {
+        case 'text':
+          inputStatus.isValid = this.checkFirstName(input.value);
+          break;
+        case 'email':
+          inputStatus.isValid = this.checkEmail(input.value);
+          break;
+        case 'date':
+          inputStatus.isValid = this.checkDate(input.value);
+          break;
+        case 'number':
+          inputStatus.isValid = this.checkNbOfTournaments(input.value);
+          break;
+        default:
+          console.log('champs de type inconnu ou type non précisé');
+      }
+      this.inputValuesStatus.push(inputStatus);
+    });
+    this.onNewInputStatus(this.inputValuesStatus);
   };
 }
