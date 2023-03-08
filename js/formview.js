@@ -1,9 +1,15 @@
 export default class FormView {
   constructor() {
     this.modalBtn = document.querySelectorAll('.modal-btn');
+    this.modalCloseBtn = document.querySelectorAll('.close');
     this.modalbg = document.querySelector('.bground');
     this.formTextInputs = document.querySelectorAll('.text-control');
     this.modalForm = document.getElementById('reserve');
+    // messages
+    this.errorMessages = {
+      invalid: 'Valeur incorrecte pour ce champ',
+      required: 'Ce champ est requis',
+    };
   }
 
   openForm = () => {
@@ -12,6 +18,28 @@ export default class FormView {
         this.modalbg.style.display = 'block';
       })
     );
+  };
+
+  closeForm = () => {
+    this.modalCloseBtn.forEach((btn) =>
+      btn.addEventListener('click', () => {
+        this.modalbg.style.display = 'none';
+      })
+    );
+    document.addEventListener('keydown', ({ key }) => {
+      if (key === 'Escape') {
+        this.modalbg.style.display = 'none';
+      }
+    });
+  };
+
+  clearInputError = () => {
+    // reset data attribute on user action
+    this.formTextInputs.forEach((input) => {
+      input.addEventListener('keyup', () => {
+        this.removeDataError(input);
+      });
+    });
   };
 
   bindSubmitForm = (handler) => {
@@ -25,23 +53,15 @@ export default class FormView {
     if (input) {
       input.parentNode.setAttribute('data-error-visible', `${!status.isValid}`);
       if (!status.isValid) {
-        input.parentNode.setAttribute('data-error', status.message);
+        const message = status.isEmpty
+          ? this.errorMessages.required
+          : this.errorMessages.invalid;
+        input.parentNode.setAttribute('data-error', message);
       }
     }
   };
 
-  displayHighLight = (index, isValid, message) => {
-    const errorous = !isValid;
-    this.formTextInputs[index].parentNode.setAttribute(
-      'data-error-visible',
-      `${errorous}`
-    );
-    if (errorous) {
-      this.formTextInputs[index].parentNode.setAttribute('data-error', message);
-    }
-  };
-
-  removeDataError = (index) => {
-    this.formTextInputs[index].parentNode.removeAttribute('data-error-visible');
+  removeDataError = (input) => {
+    input.parentNode.removeAttribute('data-error-visible');
   };
 }

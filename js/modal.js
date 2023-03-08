@@ -1,6 +1,4 @@
 /* eslint-disable import/extensions */
-import FormView from './formview.js';
-import FormModel from './formmodel.js';
 import FormController from './formcontroller.js';
 
 function editNav() {

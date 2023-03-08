@@ -12,20 +12,12 @@ export default class FormController {
     this.view.displayInputStatus(input, inputStatus);
   };
 
-  callbackTest = (values) => console.log(values);
-
   runForm = () => {
+    this.model.bindNewInputStatus(this.changeInputStatus);
     this.view.openForm();
-    this.model.bindNewInputStatus(this.callbackTest);
+    this.view.closeForm();
+    this.view.clearInputError();
     this.view.bindSubmitForm(this.model.addinputStatus);
-    //console.log(this.model.inputValuesStatus);
-
-    /* this.model.bindNewInputStatus(
-      this.changeInputStatus(
-        this.model.currentInput,
-        this.model.inputValuesStatus.at(-1)
-      )
-    ); */
   };
 
   handleInput = (input) => {
