@@ -6,9 +6,9 @@ export default class FormModel {
     this.emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   }
 
-  bindNewInputStatus(callback) {
+  bindNewInputStatus = (callback) => {
     this.onNewInputStatus = callback;
-  }
+  };
 
   checkFirstName = (inputStatus) => this.namesPattern.test(inputStatus);
 
@@ -26,7 +26,6 @@ export default class FormModel {
   };
 
   checkAge = (ageVal) => {
-    // handle error message here
     if (ageVal) {
       return ageVal > 7 && ageVal < 77;
     }
@@ -53,7 +52,7 @@ export default class FormModel {
             inputStatus.isValid = this.checkNbOfTournaments(input.value);
             break;
           default:
-            console.log('champ de type inconnu ou type non précisé');
+            console.error('champ de type inconnu ou type non précisé');
         }
       }
       this.inputValuesStatus.push(inputStatus);

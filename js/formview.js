@@ -5,12 +5,18 @@ export default class FormView {
     this.modalbg = document.querySelector('.bground');
     this.formTextInputs = document.querySelectorAll('.text-control');
     this.modalForm = document.getElementById('reserve');
-    // messages
     this.errorMessages = {
       invalid: 'Valeur incorrecte pour ce champ',
       required: 'Ce champ est requis',
     };
   }
+
+  bindSubmitForm = (handler) => {
+    this.modalForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      handler(this.formTextInputs);
+    });
+  };
 
   openForm = () => {
     this.modalBtn.forEach((btn) =>
@@ -34,18 +40,10 @@ export default class FormView {
   };
 
   clearInputError = () => {
-    // reset data attribute on user action
     this.formTextInputs.forEach((input) => {
       input.addEventListener('keyup', () => {
         this.removeDataError(input);
       });
-    });
-  };
-
-  bindSubmitForm = (handler) => {
-    this.modalForm.addEventListener('submit', (event) => {
-      event.preventDefault();
-      handler(this.formTextInputs);
     });
   };
 

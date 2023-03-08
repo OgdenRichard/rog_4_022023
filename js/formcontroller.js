@@ -13,14 +13,10 @@ export default class FormController {
   };
 
   runForm = () => {
-    this.model.bindNewInputStatus(this.changeInputStatus);
     this.view.openForm();
     this.view.closeForm();
     this.view.clearInputError();
     this.view.bindSubmitForm(this.model.addinputStatus);
-  };
-
-  handleInput = (input) => {
-    this.model.addInputValue(input);
+    this.model.bindNewInputStatus(this.changeInputStatus);
   };
 }
