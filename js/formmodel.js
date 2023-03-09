@@ -35,7 +35,19 @@ export default class FormModel {
     }
   };
 
-  checkLocations = (locations) => {
+  verifyCheckboxes = (checkboxes) => {
+    const checkBoxInput = { isValid: true };
+    checkboxes.forEach((checkbox) => {
+      checkBoxInput.id = checkbox.id;
+      if (checkbox.required && !checkbox.checked) {
+        checkBoxInput.isValid = false;
+      }
+      this.inputValuesStatus.push(checkBoxInput);
+      this.onNewInputStatus(checkbox, checkBoxInput);
+    });
+  };
+
+  verifyLocations = (locations) => {
     const locationChoice = { isValid: false };
     locations.forEach((location) => {
       if (location.checked) {
@@ -50,7 +62,7 @@ export default class FormModel {
     this.processLocationChoice(locationChoice);
   };
 
-  checkTextInputs = (textInputs) => {
+  verifyTextInputs = (textInputs) => {
     textInputs.forEach((input) => {
       const inputStatus = { id: input.id, isValid: false };
       if (input.type !== 'number' && !input.value.length) {
@@ -80,7 +92,8 @@ export default class FormModel {
 
   addinputStatus = (textInputs, locations, checkboxes) => {
     this.inputValuesStatus = [];
-    this.checkTextInputs(textInputs);
-    this.checkLocations(locations);
+    this.verifyTextInputs(textInputs);
+    this.verifyCheckboxes(checkboxes);
+    this.verifyLocations(locations);
   };
 }
