@@ -35,10 +35,22 @@ export default class FormModel {
     }
   };
 
-  checkLocation = () => {};
+  checkLocations = (locations) => {
+    const locationChoice = { isValid: false };
+    locations.forEach((location) => {
+      if (location.checked) {
+        locationChoice.id = location.id;
+        locationChoice.isValid = true;
+        this.inputValuesStatus.push(locationChoice);
+      }
+    });
+    if (!locationChoice.isValid) {
+      this.inputValuesStatus.push(locationChoice);
+    }
+    this.processLocationChoice(locationChoice);
+  };
 
-  addinputStatus = (textInputs, locations, checkbox) => {
-    this.inputValuesStatus = [];
+  checkTextInputs = (textInputs) => {
     textInputs.forEach((input) => {
       const inputStatus = { id: input.id, isValid: false };
       if (input.type !== 'number' && !input.value.length) {
@@ -64,17 +76,11 @@ export default class FormModel {
       this.inputValuesStatus.push(inputStatus);
       this.onNewInputStatus(input, inputStatus);
     });
-    const locationChoice = { isValid: false };
-    locations.forEach((location) => {
-      if (location.checked) {
-        locationChoice.id = location.id;
-        locationChoice.isValid = true;
-        this.inputValuesStatus.push(locationChoice);
-      }
-    });
-    if (!locationChoice.isValid) {
-      this.inputValuesStatus.push(locationChoice);
-    }
-    this.processLocationChoice(locationChoice);
+  };
+
+  addinputStatus = (textInputs, locations, checkboxes) => {
+    this.inputValuesStatus = [];
+    this.checkTextInputs(textInputs);
+    this.checkLocations(locations);
   };
 }
