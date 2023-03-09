@@ -35,6 +35,8 @@ export default class FormModel {
     }
   };
 
+  checkLocation = () => {};
+
   addinputStatus = (textInputs, locations, checkbox) => {
     this.inputValuesStatus = [];
     textInputs.forEach((input) => {
@@ -62,15 +64,15 @@ export default class FormModel {
       this.inputValuesStatus.push(inputStatus);
       this.onNewInputStatus(input, inputStatus);
     });
-    const locationChoice = { type: 'radio', hasLocation: false };
+    const locationChoice = { isValid: false };
     locations.forEach((location) => {
       if (location.checked) {
-        locationChoice.hasLocation = true;
         locationChoice.id = location.id;
+        locationChoice.isValid = true;
         this.inputValuesStatus.push(locationChoice);
       }
     });
-    if (!locationChoice.hasLocation) {
+    if (!locationChoice.isValid) {
       this.inputValuesStatus.push(locationChoice);
     }
     this.processLocationChoice(locationChoice);

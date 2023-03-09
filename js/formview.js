@@ -62,7 +62,7 @@ export default class FormView {
   };
 
   displayLocationStatus = (locationChoice) => {
-    if (!locationChoice.hasLocation) {
+    if (!locationChoice.isValid) {
       this.locationsVals[0].parentNode.setAttribute(
         'data-error-visible',
         'true'
