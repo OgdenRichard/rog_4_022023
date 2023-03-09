@@ -4,6 +4,8 @@ export default class FormView {
     this.modalCloseBtn = document.querySelectorAll('.close');
     this.modalbg = document.querySelector('.bground');
     this.formTextInputs = document.querySelectorAll('.text-control');
+    this.locationsVals = document.getElementsByName('location');
+    this.termsOfUse = document.getElementById('checkbox1');
     this.modalForm = document.getElementById('reserve');
     this.errorMessages = {
       invalid: 'Valeur incorrecte pour ce champ',
@@ -14,7 +16,7 @@ export default class FormView {
   bindSubmitForm = (handler) => {
     this.modalForm.addEventListener('submit', (event) => {
       event.preventDefault();
-      handler(this.formTextInputs);
+      handler(this.formTextInputs, this.locationsVals, this.termsOfUse);
     });
   };
 
@@ -56,6 +58,16 @@ export default class FormView {
           : this.errorMessages.invalid;
         input.parentNode.setAttribute('data-error', message);
       }
+    }
+  };
+
+  displayLocationStatus = (locationChoice) => {
+    if (!locationChoice.hasLocation) {
+      this.locationsVals[0].parentNode.setAttribute(
+        'data-error-visible',
+        'true'
+      );
+      this.locationsVals[0].parentNode.setAttribute('data-error', 'acthung');
     }
   };
 

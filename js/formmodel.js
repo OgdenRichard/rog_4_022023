@@ -10,6 +10,10 @@ export default class FormModel {
     this.onNewInputStatus = callback;
   };
 
+  bindLocationChoice = (callback) => {
+    this.processLocationChoice = callback;
+  };
+
   checkFirstName = (inputStatus) => this.namesPattern.test(inputStatus);
 
   checkEmail = (inputStatus) => this.emailPattern.test(inputStatus);
@@ -31,7 +35,7 @@ export default class FormModel {
     }
   };
 
-  addinputStatus = (textInputs) => {
+  addinputStatus = (textInputs, locations, checkbox) => {
     this.inputValuesStatus = [];
     textInputs.forEach((input) => {
       const inputStatus = { id: input.id, isValid: false };
@@ -58,5 +62,17 @@ export default class FormModel {
       this.inputValuesStatus.push(inputStatus);
       this.onNewInputStatus(input, inputStatus);
     });
+    const locationChoice = { type: 'radio', hasLocation: false };
+    locations.forEach((location) => {
+      if (location.checked) {
+        locationChoice.hasLocation = true;
+        locationChoice.id = location.id;
+        this.inputValuesStatus.push(locationChoice);
+      }
+    });
+    if (!locationChoice.hasLocation) {
+      this.inputValuesStatus.push(locationChoice);
+    }
+    this.processLocationChoice(locationChoice);
   };
 }

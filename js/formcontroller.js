@@ -8,8 +8,12 @@ export default class FormController {
     this.view = new FormView();
   }
 
-  changeInputStatus = (input, inputStatus) => {
+  setInputStatus = (input, inputStatus) => {
     this.view.displayInputStatus(input, inputStatus);
+  };
+
+  setLocationStatus = (locationStatus) => {
+    this.view.displayLocationStatus(locationStatus);
   };
 
   runForm = () => {
@@ -17,6 +21,7 @@ export default class FormController {
     this.view.closeForm();
     this.view.clearInputError();
     this.view.bindSubmitForm(this.model.addinputStatus);
-    this.model.bindNewInputStatus(this.changeInputStatus);
+    this.model.bindNewInputStatus(this.setInputStatus);
+    this.model.bindLocationChoice(this.setLocationStatus);
   };
 }
