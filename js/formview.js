@@ -6,6 +6,7 @@ export default class FormView {
     this.formTextInputs = document.querySelectorAll('.text-control');
     this.locationsVals = document.getElementsByName('location');
     this.checkboxes = document.querySelectorAll('input[type=checkbox]');
+    this.modalBody = document.querySelector('.modal-body');
     this.modalForm = document.getElementById('reserve');
     this.errorMessages = {
       invalid: 'Valeur incorrecte pour ce champ',
@@ -18,8 +19,32 @@ export default class FormView {
   bindSubmitForm = (handler) => {
     this.modalForm.addEventListener('submit', (event) => {
       event.preventDefault();
+      this.formIsValid = true;
       handler(this.formTextInputs, this.locationsVals, this.checkboxes);
+      if (this.formIsValid) {
+        // this.modalbg.style.display = 'none';
+        // TODO vider le local storage
+        // TODO restaurer modalForm on close hors submit
+        this.setCompletionModal();
+      }
     });
+  };
+
+  setCompletionModal = () => {
+    const formHeight = this.modalForm.offsetHeight;
+    const formBtn = this.modalForm.querySelector('input[type=submit]');
+    const btnHeight = formBtn.offsetHeight;
+    formBtn.value = 'Fermer';
+    const completionText = document.createElement('div');
+    completionText.innerText = 'Merci pour votre inscription';
+    completionText.style.height = `${formHeight - btnHeight}px`;
+    const completionForm = this.modalForm.cloneNode();
+    completionForm.id = 'completion';
+    completionForm.innerHTML = '';
+    this.modalBody.innerHTML = '';
+    this.modalBody.appendChild(completionForm);
+    completionForm.appendChild(completionText);
+    completionForm.appendChild(formBtn);
   };
 
   openForm = () => {
@@ -72,6 +97,7 @@ export default class FormView {
   displayTextStatus = (input, status) => {
     input.parentNode.setAttribute('data-error-visible', `${!status.isValid}`);
     if (!status.isValid) {
+      this.formIsValid = false;
       const message = status.isEmpty
         ? this.errorMessages.required
         : this.errorMessages.invalid;
@@ -86,6 +112,7 @@ export default class FormView {
       `${!status.isValid}`
     );
     if (!status.isValid) {
+      this.formIsValid = false;
       checkbox.nextElementSibling.setAttribute(
         'data-error',
         this.errorMessages.termsofuse
@@ -100,6 +127,7 @@ export default class FormView {
       `${!locationChoice.isValid}`
     );
     if (!locationChoice.isValid) {
+      this.formIsValid = false;
       radio.parentNode.setAttribute('data-error-visible', 'true');
       radio.parentNode.setAttribute('data-error', this.errorMessages.nochoice);
     }
