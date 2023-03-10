@@ -266,6 +266,12 @@ input {
 .checkbox2-label[data-error-visible='true']::after {
   opacity: 1;
 }
+
+/* TODO : gérer transition et colorisation du label/checkbox*/
+.checkbox2-label[data-error-visible='true']::after {
+  font-size: 0.8em;
+  text-align: left;
+}
 .formData[data-error-visible='true'] .text-control {
   border: 2px solid #e54858;
 }

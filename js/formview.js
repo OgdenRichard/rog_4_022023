@@ -51,17 +51,37 @@ export default class FormView {
 
   displayInputStatus = (input, status) => {
     if (input) {
-      input.parentNode.setAttribute('data-error-visible', `${!status.isValid}`);
-      if (!status.isValid) {
-        const message = status.isEmpty
-          ? this.errorMessages.required
-          : this.errorMessages.invalid;
-        if (input.type === 'checkbox') {
-          input.nextElementSibling.setAttribute('data-error', message);
-        } else {
-          input.parentNode.setAttribute('data-error', message);
+      if (input.type !== 'checkbox') {
+        input.parentNode.setAttribute(
+          'data-error-visible',
+          `${!status.isValid}`
+        );
+        if (!status.isValid) {
+          const message = status.isEmpty
+            ? this.errorMessages.required
+            : this.errorMessages.invalid;
+          if (input.type === 'checkbox') {
+            input.nextElementSibling.setAttribute('data-error', message);
+          } else {
+            input.parentNode.setAttribute('data-error', message);
+          }
         }
+      } else {
+        this.displayCheckBoxStatus(input, status);
       }
+    }
+  };
+
+  displayCheckBoxStatus = (checkbox, status) => {
+    checkbox.nextElementSibling.setAttribute(
+      'data-error-visible',
+      `${!status.isValid}`
+    );
+    if (!status.isValid) {
+      checkbox.nextElementSibling.setAttribute(
+        'data-error',
+        this.errorMessages.required
+      );
     }
   };
 

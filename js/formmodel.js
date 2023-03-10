@@ -36,8 +36,8 @@ export default class FormModel {
   };
 
   verifyCheckboxes = (checkboxes) => {
-    const checkBoxInput = { isValid: true };
     checkboxes.forEach((checkbox) => {
+      const checkBoxInput = { isValid: true };
       checkBoxInput.id = checkbox.id;
       if (checkbox.required && !checkbox.checked) {
         checkBoxInput.isValid = false;
@@ -49,6 +49,7 @@ export default class FormModel {
 
   verifyLocations = (locations) => {
     const locationChoice = { isValid: false };
+    // TODO : boucle for avec break on true?
     locations.forEach((location) => {
       if (location.checked) {
         locationChoice.id = location.id;
