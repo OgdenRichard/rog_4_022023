@@ -10,10 +10,6 @@ export default class FormModel {
     this.onNewInputStatus = callback;
   };
 
-  bindLocationChoice = (callback) => {
-    this.processLocationChoice = callback;
-  };
-
   checkFirstName = (inputStatus) => this.namesPattern.test(inputStatus);
 
   checkEmail = (inputStatus) => this.emailPattern.test(inputStatus);
@@ -60,7 +56,7 @@ export default class FormModel {
     if (!locationChoice.isValid) {
       this.inputValuesStatus.push(locationChoice);
     }
-    this.processLocationChoice(locations[0], locationChoice);
+    this.onNewInputStatus(locations[0], locationChoice);
   };
 
   verifyTextInputs = (textInputs) => {

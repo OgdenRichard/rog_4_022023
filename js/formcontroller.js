@@ -22,6 +22,5 @@ export default class FormController {
     this.view.clearInputError();
     this.view.bindSubmitForm(this.model.addinputStatus);
     this.model.bindNewInputStatus(this.setInputStatus);
-    this.model.bindLocationChoice(this.setLocationStatus);
   };
 }

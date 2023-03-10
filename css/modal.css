@@ -257,20 +257,28 @@ input {
   display: block;
   margin-top: 7px;
   margin-bottom: 7px;
-  text-align: right;
+  text-align: left;
   line-height: 0.3;
   opacity: 0;
   transition: 0.3s;
 }
+
+.checkbox2-label[data-error-visible='true'] {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
 .formData[data-error-visible='true']::after,
 .checkbox2-label[data-error-visible='true']::after {
   opacity: 1;
 }
 
-/* TODO : gérer transition et colorisation du label/checkbox*/
+.checkbox2-label[data-error-visible='false']::after {
+  display: none;
+}
+
 .checkbox2-label[data-error-visible='true']::after {
   font-size: 0.8em;
-  text-align: left;
 }
 .formData[data-error-visible='true'] .text-control {
   border: 2px solid #e54858;

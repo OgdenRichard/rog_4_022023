@@ -10,6 +10,8 @@ export default class FormView {
     this.errorMessages = {
       invalid: 'Valeur incorrecte pour ce champ',
       required: 'Ce champ est requis',
+      nochoice: 'Vous devez choisir un tournoi',
+      termsofuse: 'Vous devez accepter les CGU',
     };
   }
 
@@ -58,6 +60,9 @@ export default class FormView {
         case 'checkbox':
           this.displayCheckBoxStatus(input, status);
           break;
+        case 'radio':
+          this.displayLocationStatus(input, status);
+          break;
         default:
           break;
       }
@@ -74,6 +79,7 @@ export default class FormView {
     }
   };
 
+  // TODO corriger margin
   displayCheckBoxStatus = (checkbox, status) => {
     checkbox.nextElementSibling.setAttribute(
       'data-error-visible',
@@ -82,15 +88,20 @@ export default class FormView {
     if (!status.isValid) {
       checkbox.nextElementSibling.setAttribute(
         'data-error',
-        this.errorMessages.required
+        this.errorMessages.termsofuse
       );
     }
   };
 
+  // TODO : regrouper avec traitement text inputs
   displayLocationStatus = (radio, locationChoice) => {
+    radio.parentNode.setAttribute(
+      'data-error-visible',
+      `${!locationChoice.isValid}`
+    );
     if (!locationChoice.isValid) {
       radio.parentNode.setAttribute('data-error-visible', 'true');
-      radio.parentNode.setAttribute('data-error', 'acthung');
+      radio.parentNode.setAttribute('data-error', this.errorMessages.nochoice);
     }
   };
 
