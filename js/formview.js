@@ -51,24 +51,26 @@ export default class FormView {
 
   displayInputStatus = (input, status) => {
     if (input) {
-      if (input.type !== 'checkbox') {
-        input.parentNode.setAttribute(
-          'data-error-visible',
-          `${!status.isValid}`
-        );
-        if (!status.isValid) {
-          const message = status.isEmpty
-            ? this.errorMessages.required
-            : this.errorMessages.invalid;
-          if (input.type === 'checkbox') {
-            input.nextElementSibling.setAttribute('data-error', message);
-          } else {
-            input.parentNode.setAttribute('data-error', message);
-          }
-        }
-      } else {
-        this.displayCheckBoxStatus(input, status);
+      switch (status.type) {
+        case 'text':
+          this.displayTextStatus(input, status);
+          break;
+        case 'checkbox':
+          this.displayCheckBoxStatus(input, status);
+          break;
+        default:
+          break;
       }
+    }
+  };
+
+  displayTextStatus = (input, status) => {
+    input.parentNode.setAttribute('data-error-visible', `${!status.isValid}`);
+    if (!status.isValid) {
+      const message = status.isEmpty
+        ? this.errorMessages.required
+        : this.errorMessages.invalid;
+      input.parentNode.setAttribute('data-error', message);
     }
   };
 
@@ -85,13 +87,10 @@ export default class FormView {
     }
   };
 
-  displayLocationStatus = (locationChoice) => {
+  displayLocationStatus = (radio, locationChoice) => {
     if (!locationChoice.isValid) {
-      this.locationsVals[0].parentNode.setAttribute(
-        'data-error-visible',
-        'true'
-      );
-      this.locationsVals[0].parentNode.setAttribute('data-error', 'acthung');
+      radio.parentNode.setAttribute('data-error-visible', 'true');
+      radio.parentNode.setAttribute('data-error', 'acthung');
     }
   };
 

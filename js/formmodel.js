@@ -37,7 +37,7 @@ export default class FormModel {
 
   verifyCheckboxes = (checkboxes) => {
     checkboxes.forEach((checkbox) => {
-      const checkBoxInput = { isValid: true };
+      const checkBoxInput = { type: 'checkbox', isValid: true };
       checkBoxInput.id = checkbox.id;
       if (checkbox.required && !checkbox.checked) {
         checkBoxInput.isValid = false;
@@ -48,7 +48,7 @@ export default class FormModel {
   };
 
   verifyLocations = (locations) => {
-    const locationChoice = { isValid: false };
+    const locationChoice = { type: 'radio', isValid: false };
     // TODO : boucle for avec break on true?
     locations.forEach((location) => {
       if (location.checked) {
@@ -60,12 +60,12 @@ export default class FormModel {
     if (!locationChoice.isValid) {
       this.inputValuesStatus.push(locationChoice);
     }
-    this.processLocationChoice(locationChoice);
+    this.processLocationChoice(locations[0], locationChoice);
   };
 
   verifyTextInputs = (textInputs) => {
     textInputs.forEach((input) => {
-      const inputStatus = { id: input.id, isValid: false };
+      const inputStatus = { type: 'text', id: input.id, isValid: false };
       if (input.type !== 'number' && !input.value.length) {
         inputStatus.isEmpty = true;
       } else {

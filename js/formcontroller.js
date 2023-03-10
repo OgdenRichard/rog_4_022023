@@ -12,8 +12,8 @@ export default class FormController {
     this.view.displayInputStatus(input, inputStatus);
   };
 
-  setLocationStatus = (locationStatus) => {
-    this.view.displayLocationStatus(locationStatus);
+  setLocationStatus = (radio, locationStatus) => {
+    this.view.displayLocationStatus(radio, locationStatus);
   };
 
   runForm = () => {
