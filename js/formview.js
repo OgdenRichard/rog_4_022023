@@ -22,8 +22,8 @@ export default class FormView {
       this.formIsValid = true;
       handler(this.formTextInputs, this.locationsVals, this.checkboxes);
       if (this.formIsValid) {
-        // this.modalbg.style.display = 'none';
         // TODO vider le local storage
+        // TODO clear form / clear data attributes
         // TODO restaurer modalForm on close hors submit
         this.setCompletionModal();
       }
@@ -45,6 +45,7 @@ export default class FormView {
     this.modalBody.appendChild(completionForm);
     completionForm.appendChild(completionText);
     completionForm.appendChild(formBtn);
+    // TODO clear & refill form on close btn or esc
   };
 
   openForm = () => {
