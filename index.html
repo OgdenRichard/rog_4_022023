@@ -54,9 +54,9 @@
 
     <div class="bground">
       <div class="content">
-        <span class="close"></span>
+        <span class="close" id="form-close"></span>
         <div class="modal-body">
-          <form name="reserve" id="reserve" action="index.html" method="get" novalidate>
+          <form name="reserve" id="reserve" action="index.html" method="get" target="hidden-form" novalidate>
             <div class="formData">
               <label>Prénom</label><br>
               <input class="text-control" type="text" id="first" name="first" minlength="2" /><br>
@@ -129,6 +129,7 @@
     <p class="copyrights">
       Copyright 2014 - 2022, GameOn Inc.
     </p>
+    <iframe style="display:none" name="hidden-form"></iframe>
   </footer>
   <script type="module" src="./js/modal.js"></script>
 </body>
