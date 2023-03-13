@@ -32,18 +32,17 @@ export default class FormView {
   };
 
   setCompletionModal = () => {
-    const formHeight = this.modalForm.offsetHeight;
     const formBtn = this.modalForm
       .querySelector('input[type=submit]')
       .cloneNode();
-    formBtn.type = 'button';
+    const formHeight = this.modalForm.offsetHeight;
     const btnHeight = formBtn.offsetHeight;
-    formBtn.value = 'Fermer';
-    formBtn.type = 'button';
     const completionText = document.createElement('div');
+    const completionForm = this.modalForm.cloneNode();
+    formBtn.type = 'button';
+    formBtn.value = 'Fermer';
     completionText.innerText = 'Merci pour votre inscription';
     completionText.style.height = `${formHeight - btnHeight}px`;
-    const completionForm = this.modalForm.cloneNode();
     completionForm.style.visibility = 'visible';
     completionForm.id = 'completion';
     completionForm.innerHTML = '';
@@ -53,18 +52,34 @@ export default class FormView {
     completionForm.appendChild(formBtn);
     formBtn.addEventListener('click', () => {
       this.modalbg.style.display = 'none';
-      this.modalBody.innerHTML = '';
-      this.formTextInputs.forEach((input) => {
-        input.value = '';
-      });
-      this.modalBody.appendChild(this.modalForm);
+      this.restoreForm();
     });
-    // TODO clear & refill form on close btn or esc
+  };
+
+  // TODO : fonction fillForm
+
+  restoreForm = () => {
+    if (!document.getElementById('reserve')) {
+      this.modalBody.innerHTML = '';
+      this.modalBody.appendChild(this.modalForm);
+      this.clearForm();
+    }
+  };
+
+  clearForm = () => {
+    this.formTextInputs.forEach((input) => {
+      input.value = input.type === 'number' ? '0' : '';
+    });
+    this.locationsVals.forEach((radio) => {
+      radio.checked = false;
+    });
+    document.getElementById('checkbox2').checked = false;
   };
 
   openForm = () => {
     this.modalBtn.forEach((btn) =>
       btn.addEventListener('click', () => {
+        this.restoreForm();
         this.modalbg.style.display = 'block';
       })
     );
@@ -118,7 +133,6 @@ export default class FormView {
     }
   };
 
-  // TODO corriger margin
   displayCheckBoxStatus = (checkbox, status) => {
     checkbox.nextElementSibling.setAttribute(
       'data-error-visible',
