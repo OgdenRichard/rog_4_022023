@@ -24,8 +24,6 @@ export default class FormView {
       if (this.formIsValid) {
         this.modalForm.submit();
         // TODO vider le local storage
-        // TODO clear form / clear data attributes
-        // TODO restaurer modalForm on close hors submit
         this.setCompletionModal();
       }
     });
@@ -37,18 +35,20 @@ export default class FormView {
       .cloneNode();
     const formHeight = this.modalForm.offsetHeight;
     const btnHeight = formBtn.offsetHeight;
-    const completionText = document.createElement('div');
+    const completionDiv = document.createElement('div');
+    const completionText = document.createElement('p');
     const completionForm = this.modalForm.cloneNode();
     formBtn.type = 'button';
     formBtn.value = 'Fermer';
+    completionDiv.style.height = `${formHeight - btnHeight}px`;
+    completionDiv.className = 'completion__txt';
     completionText.innerText = 'Merci pour votre inscription';
-    completionText.style.height = `${formHeight - btnHeight}px`;
-    completionForm.style.visibility = 'visible';
     completionForm.id = 'completion';
     completionForm.innerHTML = '';
     this.modalBody.innerHTML = '';
     this.modalBody.appendChild(completionForm);
-    completionForm.appendChild(completionText);
+    completionForm.appendChild(completionDiv);
+    completionDiv.appendChild(completionText);
     completionForm.appendChild(formBtn);
     formBtn.addEventListener('click', () => {
       this.modalbg.style.display = 'none';
@@ -69,10 +69,13 @@ export default class FormView {
   clearForm = () => {
     this.formTextInputs.forEach((input) => {
       input.value = input.type === 'number' ? '0' : '';
+      this.removeDataError(input);
     });
     this.locationsVals.forEach((radio) => {
       radio.checked = false;
+      this.removeDataError(radio);
     });
+    this.removeDataError(document.getElementById('checkbox1'));
     document.getElementById('checkbox2').checked = false;
   };
 
@@ -161,6 +164,12 @@ export default class FormView {
   };
 
   removeDataError = (input) => {
-    input.parentNode.removeAttribute('data-error-visible');
+    if (input.type !== 'checkbox') {
+      input.parentNode.removeAttribute('data-error-visible');
+      input.parentNode.removeAttribute('data-error');
+    } else {
+      input.nextElementSibling.removeAttribute('data-error-visible');
+      input.nextElementSibling.removeAttribute('data-error');
+    }
   };
 }

@@ -466,6 +466,14 @@ input[data-error]::after {
   font-size: 16px;
 }
 
+.completion__txt {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+  font-size: 1.5em;
+}
+
 /* --- HERO SECTION --- */
 
 .hero-section {
