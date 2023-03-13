@@ -8,19 +8,15 @@ export default class FormController {
     this.view = new FormView();
   }
 
-  setInputStatus = (input, inputStatus) => {
-    this.view.displayInputStatus(input, inputStatus);
-  };
-
-  setLocationStatus = (radio, locationStatus) => {
-    this.view.displayLocationStatus(radio, locationStatus);
+  setInputStatus = (inputStatus) => {
+    this.view.displayInputStatus(inputStatus);
   };
 
   runForm = () => {
     this.view.openForm();
     this.view.closeForm();
     this.view.clearInputError();
-    this.view.bindSubmitForm(this.model.addinputStatus);
+    this.view.bindSubmitForm(this.model.addInputStatus);
     this.model.bindNewInputStatus(this.setInputStatus);
   };
 }

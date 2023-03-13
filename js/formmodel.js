@@ -39,7 +39,7 @@ export default class FormModel {
         checkBoxInput.isValid = false;
       }
       this.inputValuesStatus.push(checkBoxInput);
-      this.onNewInputStatus(checkbox, checkBoxInput);
+      this.onNewInputStatus(checkBoxInput);
     });
   };
 
@@ -47,8 +47,8 @@ export default class FormModel {
     const locationChoice = { type: 'radio', isValid: false };
     // TODO : boucle for avec break on true?
     locations.forEach((location) => {
+      locationChoice.id = location.id;
       if (location.checked) {
-        locationChoice.id = location.id;
         locationChoice.isValid = true;
         this.inputValuesStatus.push(locationChoice);
       }
@@ -56,7 +56,7 @@ export default class FormModel {
     if (!locationChoice.isValid) {
       this.inputValuesStatus.push(locationChoice);
     }
-    this.onNewInputStatus(locations[0], locationChoice);
+    this.onNewInputStatus(locationChoice);
   };
 
   verifyTextInputs = (textInputs) => {
@@ -79,15 +79,15 @@ export default class FormModel {
             inputStatus.isValid = this.checkNbOfTournaments(input.value);
             break;
           default:
-            console.error('champ de type inconnu ou type non précisé');
+            break;
         }
       }
       this.inputValuesStatus.push(inputStatus);
-      this.onNewInputStatus(input, inputStatus);
+      this.onNewInputStatus(inputStatus);
     });
   };
 
-  addinputStatus = (textInputs, locations, checkboxes) => {
+  addInputStatus = (textInputs, locations, checkboxes) => {
     this.inputValuesStatus = [];
     this.verifyTextInputs(textInputs);
     this.verifyCheckboxes(checkboxes);

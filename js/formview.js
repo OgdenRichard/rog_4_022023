@@ -23,7 +23,6 @@ export default class FormView {
       handler(this.formTextInputs, this.locationsVals, this.checkboxes);
       if (this.formIsValid) {
         this.modalForm.submit();
-        // TODO vider le local storage
         this.setCompletionModal();
       }
     });
@@ -107,17 +106,17 @@ export default class FormView {
     });
   };
 
-  displayInputStatus = (input, status) => {
-    if (input) {
+  displayInputStatus = (status) => {
+    if (status) {
       switch (status.type) {
         case 'text':
-          this.displayTextStatus(input, status);
+          this.displayTextStatus(status);
           break;
         case 'checkbox':
-          this.displayCheckBoxStatus(input, status);
+          this.displayCheckBoxStatus(status);
           break;
         case 'radio':
-          this.displayLocationStatus(input, status);
+          this.displayLocationStatus(status);
           break;
         default:
           break;
@@ -125,7 +124,8 @@ export default class FormView {
     }
   };
 
-  displayTextStatus = (input, status) => {
+  displayTextStatus = (status) => {
+    const input = document.getElementById(status.id);
     input.parentNode.setAttribute('data-error-visible', `${!status.isValid}`);
     if (!status.isValid) {
       this.formIsValid = false;
@@ -136,7 +136,8 @@ export default class FormView {
     }
   };
 
-  displayCheckBoxStatus = (checkbox, status) => {
+  displayCheckBoxStatus = (status) => {
+    const checkbox = document.getElementById(status.id);
     checkbox.nextElementSibling.setAttribute(
       'data-error-visible',
       `${!status.isValid}`
@@ -151,12 +152,10 @@ export default class FormView {
   };
 
   // TODO : regrouper avec traitement text inputs
-  displayLocationStatus = (radio, locationChoice) => {
-    radio.parentNode.setAttribute(
-      'data-error-visible',
-      `${!locationChoice.isValid}`
-    );
-    if (!locationChoice.isValid) {
+  displayLocationStatus = (status) => {
+    const radio = document.getElementById(status.id);
+    radio.parentNode.setAttribute('data-error-visible', `${!status.isValid}`);
+    if (!status.isValid) {
       this.formIsValid = false;
       radio.parentNode.setAttribute('data-error-visible', 'true');
       radio.parentNode.setAttribute('data-error', this.errorMessages.nochoice);
