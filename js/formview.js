@@ -28,33 +28,6 @@ export default class FormView {
     });
   };
 
-  setCompletionModal = () => {
-    const formBtn = this.modalForm
-      .querySelector('input[type=submit]')
-      .cloneNode();
-    const formHeight = this.modalForm.offsetHeight;
-    const btnHeight = formBtn.offsetHeight;
-    const completionDiv = document.createElement('div');
-    const completionText = document.createElement('p');
-    const completionForm = this.modalForm.cloneNode();
-    formBtn.type = 'button';
-    formBtn.value = 'Fermer';
-    completionDiv.style.height = `${formHeight - btnHeight}px`;
-    completionDiv.className = 'completion__txt';
-    completionText.innerText = 'Merci pour votre inscription';
-    completionForm.id = 'completion';
-    completionForm.innerHTML = '';
-    this.modalBody.innerHTML = '';
-    this.modalBody.appendChild(completionForm);
-    completionForm.appendChild(completionDiv);
-    completionDiv.appendChild(completionText);
-    completionForm.appendChild(formBtn);
-    formBtn.addEventListener('click', () => {
-      this.modalbg.style.display = 'none';
-      this.restoreForm();
-    });
-  };
-
   // TODO : fonction fillForm
 
   restoreForm = () => {
@@ -170,5 +143,32 @@ export default class FormView {
       input.nextElementSibling.removeAttribute('data-error-visible');
       input.nextElementSibling.removeAttribute('data-error');
     }
+  };
+
+  setCompletionModal = () => {
+    const formBtn = this.modalForm
+      .querySelector('input[type=submit]')
+      .cloneNode();
+    const formHeight = this.modalForm.offsetHeight;
+    const btnHeight = formBtn.offsetHeight;
+    const completionDiv = document.createElement('div');
+    const completionText = document.createElement('p');
+    const completionForm = this.modalForm.cloneNode();
+    formBtn.value = 'Fermer';
+    completionDiv.style.height = `${formHeight - btnHeight}px`;
+    completionDiv.className = 'completion__txt';
+    completionText.innerText = 'Merci pour votre inscription';
+    completionForm.id = 'completion';
+    completionForm.innerHTML = '';
+    this.modalBody.innerHTML = '';
+    this.modalBody.appendChild(completionForm);
+    completionForm.appendChild(completionDiv);
+    completionDiv.appendChild(completionText);
+    completionForm.appendChild(formBtn);
+    completionForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      this.modalbg.style.display = 'none';
+      this.restoreForm();
+    });
   };
 }

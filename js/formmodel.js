@@ -27,7 +27,7 @@ export default class FormModel {
 
   checkAge = (ageVal) => {
     if (ageVal) {
-      return ageVal > 7 && ageVal < 77;
+      return ageVal >= 7 && ageVal <= 77;
     }
   };
 
