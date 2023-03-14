@@ -28,7 +28,21 @@ export default class FormView {
     });
   };
 
-  // TODO : fonction fillForm
+  bindOpenForm = (handler) => {
+    this.modalBtn.forEach((btn) =>
+      btn.addEventListener('click', () => {
+        handler();
+        this.restoreForm();
+        this.modalbg.style.display = 'block';
+      })
+    );
+  };
+
+  fillForm = (inputValuesStatus) => {
+    inputValuesStatus.forEach((status) => {
+      this.displayInputStatus(status);
+    });
+  };
 
   restoreForm = () => {
     if (!document.getElementById('reserve')) {
@@ -49,15 +63,6 @@ export default class FormView {
     });
     this.removeDataError(document.getElementById('checkbox1'));
     document.getElementById('checkbox2').checked = false;
-  };
-
-  openForm = () => {
-    this.modalBtn.forEach((btn) =>
-      btn.addEventListener('click', () => {
-        this.restoreForm();
-        this.modalbg.style.display = 'block';
-      })
-    );
   };
 
   closeForm = () => {
@@ -99,6 +104,7 @@ export default class FormView {
 
   displayTextStatus = (status) => {
     const input = document.getElementById(status.id);
+    input.value = status.value;
     input.parentNode.setAttribute('data-error-visible', `${!status.isValid}`);
     if (!status.isValid) {
       this.formIsValid = false;
@@ -111,6 +117,7 @@ export default class FormView {
 
   displayCheckBoxStatus = (status) => {
     const checkbox = document.getElementById(status.id);
+    checkbox.checked = status.checked;
     checkbox.nextElementSibling.setAttribute(
       'data-error-visible',
       `${!status.isValid}`
@@ -132,6 +139,8 @@ export default class FormView {
       this.formIsValid = false;
       radio.parentNode.setAttribute('data-error-visible', 'true');
       radio.parentNode.setAttribute('data-error', this.errorMessages.nochoice);
+    } else {
+      radio.checked = true;
     }
   };
 

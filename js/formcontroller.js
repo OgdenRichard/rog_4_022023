@@ -8,15 +8,20 @@ export default class FormController {
     this.view = new FormView();
   }
 
-  setInputStatus = (inputStatus) => {
+  setSingleInputStatus = (inputStatus) => {
     this.view.displayInputStatus(inputStatus);
   };
 
+  setAllInputsStatus = (inputValuesStatus) => {
+    this.view.fillForm(inputValuesStatus);
+  };
+
   runForm = () => {
-    this.view.openForm();
+    this.view.bindOpenForm(this.model.checkLocalStorage);
     this.view.closeForm();
     this.view.clearInputError();
     this.view.bindSubmitForm(this.model.addInputStatus);
-    this.model.bindNewInputStatus(this.setInputStatus);
+    this.model.bindNewInputStatus(this.setSingleInputStatus);
+    this.model.bindRestoreInputValues(this.setAllInputsStatus);
   };
 }

@@ -1,6 +1,7 @@
 export default class FormModel {
   constructor() {
     this.inputValuesStatus = [];
+    this.localStorageKey = 'input_values';
     this.namesPattern =
       /^(?=.{2,40}$)([A-Za-zÀ-ÖØ-öø-ÿ])+(?:[-'\s][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
     this.emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -8,6 +9,35 @@ export default class FormModel {
 
   bindNewInputStatus = (callback) => {
     this.onNewInputStatus = callback;
+  };
+
+  bindRestoreInputValues = (callback) => {
+    this.onRestoreInputValues = callback;
+  };
+
+  checkLocalStorage = () => {
+    this.getLocalStorage();
+    if (this.inputValuesStatus.length) {
+      this.onRestoreInputValues(this.inputValuesStatus);
+    }
+  };
+
+  commitLocalStorage = () => {
+    window.localStorage.setItem(
+      this.localStorageKey,
+      JSON.stringify(this.inputValuesStatus)
+    );
+  };
+
+  getLocalStorage = () => {
+    const storageValues = window.localStorage.getItem(this.localStorageKey);
+    if (storageValues !== null) {
+      this.inputValuesStatus = JSON.parse(storageValues);
+    }
+  };
+
+  clearLocalStorage = () => {
+    window.localStorage.removeItem(this.localStorageKey);
   };
 
   checkFirstName = (inputStatus) => this.namesPattern.test(inputStatus);
@@ -35,6 +65,7 @@ export default class FormModel {
     checkboxes.forEach((checkbox) => {
       const checkBoxInput = { type: 'checkbox', isValid: true };
       checkBoxInput.id = checkbox.id;
+      checkBoxInput.checked = checkbox.checked;
       if (checkbox.required && !checkbox.checked) {
         checkBoxInput.isValid = false;
       }
@@ -45,23 +76,25 @@ export default class FormModel {
 
   verifyLocations = (locations) => {
     const locationChoice = { type: 'radio', isValid: false };
-    // TODO : boucle for avec break on true?
-    locations.forEach((location) => {
-      locationChoice.id = location.id;
-      if (location.checked) {
+    for (let i = 0; i < locations.length; i += 1) {
+      locationChoice.id = locations[i].id;
+      if (locations[i].checked) {
         locationChoice.isValid = true;
-        this.inputValuesStatus.push(locationChoice);
+        break;
       }
-    });
-    if (!locationChoice.isValid) {
-      this.inputValuesStatus.push(locationChoice);
     }
+    this.inputValuesStatus.push(locationChoice);
     this.onNewInputStatus(locationChoice);
   };
 
   verifyTextInputs = (textInputs) => {
     textInputs.forEach((input) => {
-      const inputStatus = { type: 'text', id: input.id, isValid: false };
+      const inputStatus = {
+        type: 'text',
+        value: input.value,
+        id: input.id,
+        isValid: false,
+      };
       if (input.type !== 'number' && !input.value.length) {
         inputStatus.isEmpty = true;
       } else {
@@ -92,5 +125,6 @@ export default class FormModel {
     this.verifyTextInputs(textInputs);
     this.verifyCheckboxes(checkboxes);
     this.verifyLocations(locations);
+    this.commitLocalStorage();
   };
 }
