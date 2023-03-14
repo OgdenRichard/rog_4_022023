@@ -22,7 +22,7 @@ export default class FormView {
       this.formIsValid = true;
       handler(this.formTextInputs, this.locationsVals, this.checkboxes);
       if (this.formIsValid) {
-        this.modalForm.submit();
+        this.onValidForm();
         this.setCompletionModal();
       }
     });
@@ -36,6 +36,10 @@ export default class FormView {
         this.modalbg.style.display = 'block';
       })
     );
+  };
+
+  bindClearLocalStorage = (callback) => {
+    this.onValidForm = callback;
   };
 
   fillForm = (inputValuesStatus) => {

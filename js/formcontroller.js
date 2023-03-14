@@ -21,6 +21,7 @@ export default class FormController {
     this.view.closeForm();
     this.view.clearInputError();
     this.view.bindSubmitForm(this.model.addInputStatus);
+    this.view.bindClearLocalStorage(this.model.clearLocalStorage);
     this.model.bindNewInputStatus(this.setSingleInputStatus);
     this.model.bindRestoreInputValues(this.setAllInputsStatus);
   };

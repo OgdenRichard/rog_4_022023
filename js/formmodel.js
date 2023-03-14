@@ -16,6 +16,7 @@ export default class FormModel {
   };
 
   checkLocalStorage = () => {
+    this.inputValuesStatus = [];
     this.getLocalStorage();
     if (this.inputValuesStatus.length) {
       this.onRestoreInputValues(this.inputValuesStatus);
