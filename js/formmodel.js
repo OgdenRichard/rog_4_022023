@@ -1,4 +1,7 @@
 export default class FormModel {
+  /**
+   * @constructor
+   */
   constructor() {
     this.inputValuesStatus = [];
     this.localStorageKey = 'input_values';
@@ -7,14 +10,25 @@ export default class FormModel {
     this.emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
   }
 
+  /**
+   *
+   * @param {callback} callback
+   */
   bindNewInputStatus = (callback) => {
     this.onNewInputStatus = callback;
   };
 
+  /**
+   *
+   * @param {callback} callback
+   */
   bindRestoreInputValues = (callback) => {
     this.onRestoreInputValues = callback;
   };
 
+  /**
+   *
+   */
   checkLocalStorage = () => {
     this.inputValuesStatus = [];
     this.getLocalStorage();
@@ -23,6 +37,9 @@ export default class FormModel {
     }
   };
 
+  /**
+   *
+   */
   commitLocalStorage = () => {
     window.localStorage.setItem(
       this.localStorageKey,
@@ -30,6 +47,9 @@ export default class FormModel {
     );
   };
 
+  /**
+   *
+   */
   getLocalStorage = () => {
     const storageValues = window.localStorage.getItem(this.localStorageKey);
     if (storageValues !== null) {
@@ -37,16 +57,39 @@ export default class FormModel {
     }
   };
 
+  /**
+   *
+   */
   clearLocalStorage = () => {
     window.localStorage.removeItem(this.localStorageKey);
   };
 
+  /**
+   *
+   * @param {string} inputStatus
+   * @returns {boolean}
+   */
   checkFirstName = (inputStatus) => this.namesPattern.test(inputStatus);
 
+  /**
+   *
+   * @param {string} inputStatus
+   * @returns {boolean}
+   */
   checkEmail = (inputStatus) => this.emailPattern.test(inputStatus);
 
+  /**
+   *
+   * @param {number} strNumber
+   * @returns {boolean}
+   */
   checkNbOfTournaments = (strNumber) => parseInt(strNumber, 10) >= 0;
 
+  /**
+   *
+   * @param {string} strDate
+   * @returns {number}
+   */
   checkDate = (strDate) => {
     const inputDate = new Date(strDate);
     const todayDate = new Date();
@@ -56,12 +99,21 @@ export default class FormModel {
     }
   };
 
+  /**
+   *
+   * @param {number} ageVal
+   * @returns {Boolean}
+   */
   checkAge = (ageVal) => {
     if (ageVal) {
       return ageVal >= 7 && ageVal <= 77;
     }
   };
 
+  /**
+   *
+   * @param {Array} checkboxes
+   */
   verifyCheckboxes = (checkboxes) => {
     checkboxes.forEach((checkbox) => {
       const checkBoxInput = { type: 'checkbox', isValid: true };
@@ -75,6 +127,10 @@ export default class FormModel {
     });
   };
 
+  /**
+   *
+   * @param {Array} locations
+   */
   verifyLocations = (locations) => {
     const locationChoice = { type: 'radio', isValid: false };
     for (let i = 0; i < locations.length; i += 1) {
@@ -88,6 +144,10 @@ export default class FormModel {
     this.onNewInputStatus(locationChoice);
   };
 
+  /**
+   *
+   * @param {HTMLElement} textInputs
+   */
   verifyTextInputs = (textInputs) => {
     textInputs.forEach((input) => {
       const inputStatus = {
@@ -121,6 +181,12 @@ export default class FormModel {
     });
   };
 
+  /**
+   *
+   * @param {Array} textInputs
+   * @param {Array} locations
+   * @param {Array} checkboxes
+   */
   addInputStatus = (textInputs, locations, checkboxes) => {
     this.inputValuesStatus = [];
     this.verifyTextInputs(textInputs);

@@ -1,4 +1,7 @@
 export default class FormView {
+  /**
+   * @constructor
+   */
   constructor() {
     this.modalBtn = document.querySelectorAll('.modal-btn');
     this.modalCloseBtn = document.getElementById('form-close');
@@ -16,6 +19,11 @@ export default class FormView {
     };
   }
 
+  /**
+   *
+   * @param {callback} handler
+   *
+   */
   bindSubmitForm = (handler) => {
     this.modalForm.addEventListener('submit', (event) => {
       event.preventDefault();
@@ -28,6 +36,10 @@ export default class FormView {
     });
   };
 
+  /**
+   *
+   * @param {callback}} handler
+   */
   bindOpenForm = (handler) => {
     this.modalBtn.forEach((btn) =>
       btn.addEventListener('click', () => {
@@ -38,16 +50,27 @@ export default class FormView {
     );
   };
 
+  /**
+   *
+   * @param {callback}} handler
+   */
   bindClearLocalStorage = (callback) => {
     this.onValidForm = callback;
   };
 
+  /**
+   *
+   * @param {Array} inputValuesStatus
+   */
   fillForm = (inputValuesStatus) => {
     inputValuesStatus.forEach((status) => {
       this.displayInputStatus(status);
     });
   };
 
+  /**
+   *
+   */
   restoreForm = () => {
     if (!document.getElementById('reserve')) {
       this.modalBody.innerHTML = '';
@@ -56,6 +79,9 @@ export default class FormView {
     }
   };
 
+  /**
+   *
+   */
   clearForm = () => {
     this.formTextInputs.forEach((input) => {
       input.value = input.type === 'number' ? '0' : '';
@@ -69,6 +95,9 @@ export default class FormView {
     document.getElementById('checkbox2').checked = false;
   };
 
+  /**
+   *
+   */
   closeForm = () => {
     this.modalCloseBtn.addEventListener('click', () => {
       this.modalbg.style.display = 'none';
@@ -80,6 +109,9 @@ export default class FormView {
     });
   };
 
+  /**
+   *
+   */
   clearInputError = () => {
     this.formTextInputs.forEach((input) => {
       input.addEventListener('keyup', () => {
@@ -88,6 +120,10 @@ export default class FormView {
     });
   };
 
+  /**
+   *
+   * @param {object} status
+   */
   displayInputStatus = (status) => {
     if (status) {
       switch (status.type) {
@@ -106,6 +142,10 @@ export default class FormView {
     }
   };
 
+  /**
+   *
+   * @param {object} status
+   */
   displayTextStatus = (status) => {
     const input = document.getElementById(status.id);
     input.value = status.value;
@@ -119,6 +159,10 @@ export default class FormView {
     }
   };
 
+  /**
+   *
+   * @param {object} status
+   */
   displayCheckBoxStatus = (status) => {
     const checkbox = document.getElementById(status.id);
     checkbox.checked = status.checked;
@@ -136,6 +180,10 @@ export default class FormView {
   };
 
   // TODO : regrouper avec traitement text inputs
+  /**
+   *
+   * @param {object} status
+   */
   displayLocationStatus = (status) => {
     const radio = document.getElementById(status.id);
     radio.parentNode.setAttribute('data-error-visible', `${!status.isValid}`);
@@ -148,6 +196,10 @@ export default class FormView {
     }
   };
 
+  /**
+   *
+   * @param {HTMLElement} input
+   */
   removeDataError = (input) => {
     if (input.type !== 'checkbox') {
       input.parentNode.removeAttribute('data-error-visible');
@@ -158,6 +210,9 @@ export default class FormView {
     }
   };
 
+  /**
+   *
+   */
   setCompletionModal = () => {
     const formBtn = this.modalForm
       .querySelector('input[type=submit]')
