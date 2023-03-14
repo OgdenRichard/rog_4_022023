@@ -3,8 +3,8 @@ export default class FormModel {
     this.inputValuesStatus = [];
     this.localStorageKey = 'input_values';
     this.namesPattern =
-      /^(?=.{2,40}$)([A-Za-zÀ-ÖØ-öø-ÿ])+(?:[-'\s][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
-    this.emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      /^(?=.{2,40}$)([A-Za-zÀ-ÖØ-öø-ÿ])+(?:['\s][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
+    this.emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
   }
 
   bindNewInputStatus = (callback) => {
