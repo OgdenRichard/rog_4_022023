@@ -88,7 +88,7 @@ export default class FormModel {
   /**
    *
    * @param {string} strDate
-   * @returns {number}
+   * @returns {number|Boolean}
    */
   checkDate = (strDate) => {
     const inputDate = new Date(strDate);
@@ -97,6 +97,7 @@ export default class FormModel {
       const datesDiff = new Date(todayDate - inputDate);
       return datesDiff.getUTCFullYear() - 1970;
     }
+    return false;
   };
 
   /**
@@ -108,6 +109,7 @@ export default class FormModel {
     if (ageVal) {
       return ageVal >= 7 && ageVal <= 77;
     }
+    return false;
   };
 
   /**

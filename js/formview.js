@@ -38,7 +38,7 @@ export default class FormView {
 
   /**
    *
-   * @param {callback}} handler
+   * @param {callback} handler
    */
   bindOpenForm = (handler) => {
     this.modalBtn.forEach((btn) =>
@@ -52,7 +52,7 @@ export default class FormView {
 
   /**
    *
-   * @param {callback}} handler
+   * @param {callback} handler
    */
   bindClearLocalStorage = (callback) => {
     this.onValidForm = callback;
@@ -122,7 +122,7 @@ export default class FormView {
 
   /**
    *
-   * @param {object} status
+   * @param {{}} status
    */
   displayInputStatus = (status) => {
     if (status) {
@@ -144,7 +144,7 @@ export default class FormView {
 
   /**
    *
-   * @param {object} status
+   * @param {{}} status
    */
   displayTextStatus = (status) => {
     const input = document.getElementById(status.id);
@@ -161,7 +161,7 @@ export default class FormView {
 
   /**
    *
-   * @param {object} status
+   * @param {{}} status
    */
   displayCheckBoxStatus = (status) => {
     const checkbox = document.getElementById(status.id);
@@ -182,7 +182,7 @@ export default class FormView {
   // TODO : regrouper avec traitement text inputs
   /**
    *
-   * @param {object} status
+   * @param {{}} status
    */
   displayLocationStatus = (status) => {
     const radio = document.getElementById(status.id);
