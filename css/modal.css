@@ -125,23 +125,31 @@ header {
 }
 
 @media screen and (max-width: 768px) {
+
+  .header-logo {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
   .topnav a {
     display: none;
   }
-  .topnav a.icon {
+  .topnav .icon {
     display: block;
   }
 
   .topnav.responsive {
     width: 100%;
+    display: block;
     position: absolute;
     z-index: 2;
   }
-  .topnav.responsive .main-navbar>.icon {
-   /*  position:absolute;
+ /*  .topnav.responsive .main-navbar>.icon {
+    position:absolute;
     right: 50;
-    top: 0; */
-  }
+    top: 0;
+  } */
   .topnav.responsive a {
     display: block;
     text-align: left;
