@@ -54,6 +54,12 @@ export default class FormView {
     });
   };
 
+  bindCloseTab = (handler) => {
+    window.addEventListener('beforeunload', () => {
+      handler();
+    });
+  };
+
   /**
    *
    * @param {callback} handler
