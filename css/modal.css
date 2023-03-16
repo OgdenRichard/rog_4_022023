@@ -125,6 +125,10 @@ header {
 }
 
 @media screen and (max-width: 768px) {
+  header {
+    height: 20vw;
+  }
+
   .topnav {
     flex-wrap: wrap;
     margin-right: 0;
@@ -145,6 +149,8 @@ header {
   .topnav .icon {
     display: block;
     width: 10%;
+    padding-top: 0.25em;
+    font-size: 1.75em;
   }
 
   .topnav.responsive {
@@ -163,9 +169,10 @@ header {
 
   .topnav.responsive .main-navbar > .navbar-dropdown {
     display: block;
-    background: #3876ac;
     display: flex;
     flex-direction: column;
+    margin-top: 1em;
+    background: rgb(231, 231, 231);
   }
 
   .main-navbar {
