@@ -37,6 +37,24 @@ export default class FormView {
   };
 
   /**
+   * @param {callback} handler
+   */
+  closeForm = (handler) => {
+    this.modalCloseBtn.addEventListener('click', () => {
+      this.modalbg.style.display = 'none';
+      this.formIsValid = true;
+      handler(this.formTextInputs, this.locationsVals, this.checkboxes);
+    });
+    document.addEventListener('keydown', ({ key }) => {
+      if (key === 'Escape') {
+        this.modalbg.style.display = 'none';
+        this.formIsValid = true;
+        handler(this.formTextInputs, this.locationsVals, this.checkboxes);
+      }
+    });
+  };
+
+  /**
    *
    * @param {callback} handler
    */
@@ -93,20 +111,6 @@ export default class FormView {
     });
     this.removeDataError(document.getElementById('checkbox1'));
     document.getElementById('checkbox2').checked = false;
-  };
-
-  /**
-   *
-   */
-  closeForm = () => {
-    this.modalCloseBtn.addEventListener('click', () => {
-      this.modalbg.style.display = 'none';
-    });
-    document.addEventListener('keydown', ({ key }) => {
-      if (key === 'Escape') {
-        this.modalbg.style.display = 'none';
-      }
-    });
   };
 
   /**
