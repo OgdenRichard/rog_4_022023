@@ -125,6 +125,9 @@ header {
 }
 
 @media screen and (max-width: 768px) {
+  .topnav{
+
+  }
 
   .header-logo {
     width: 100%;
@@ -140,9 +143,11 @@ header {
   }
 
   .topnav.responsive {
-    width: 100%;
     display: block;
     position: absolute;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
     z-index: 2;
   }
  /*  .topnav.responsive .main-navbar>.icon {
