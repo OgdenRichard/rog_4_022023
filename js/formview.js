@@ -13,6 +13,10 @@ export default class FormView {
     this.modalForm = document.getElementById('reserve');
     this.errorMessages = {
       invalid: 'Valeur incorrecte pour ce champ',
+      wrongname:
+        'Ponctuation, tirets, chiffres et caractères spéciaux interdits',
+      wrongnumber: 'Veuillez choisir un nombre compris entre 0 et 10',
+      wrongage: 'Vous devez avoir entre 7 et 77 ans pour participer',
       required: 'Ce champ est requis',
       nochoice: 'Vous devez choisir un tournoi',
       termsofuse: 'Vous devez accepter les CGU',
@@ -173,7 +177,7 @@ export default class FormView {
       this.formIsValid = false;
       const message = status.isEmpty
         ? this.errorMessages.required
-        : this.errorMessages.invalid;
+        : this.setErrorMessage(status.id);
       input.parentNode.setAttribute('data-error', message);
     }
   };
@@ -213,6 +217,33 @@ export default class FormView {
     } else {
       radio.checked = true;
     }
+  };
+
+  /**
+   *
+   * @param {string} id
+   * @returns {string}
+   */
+  setErrorMessage = (id) => {
+    let message = '';
+    switch (id) {
+      case 'first':
+        message = this.errorMessages.wrongname;
+        break;
+      case 'last':
+        message = this.errorMessages.wrongname;
+        break;
+      case 'birthdate':
+        message = this.errorMessages.wrongage;
+        break;
+      case 'quantity':
+        message = this.errorMessages.wrongnumber;
+        break;
+      default:
+        message = this.errorMessages.invalid;
+        break;
+    }
+    return message;
   };
 
   /**
