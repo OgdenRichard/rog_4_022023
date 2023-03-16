@@ -39,7 +39,7 @@ export default class FormView {
   /**
    * @param {callback} handler
    */
-  closeForm = (handler) => {
+  bindCloseForm = (handler) => {
     this.modalCloseBtn.addEventListener('click', () => {
       this.modalbg.style.display = 'none';
       this.formIsValid = true;
