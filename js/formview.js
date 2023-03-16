@@ -186,6 +186,21 @@ export default class FormView {
    *
    * @param {{}} status
    */
+  displayLocationStatus = (status) => {
+    const radio = document.getElementById(status.id);
+    radio.parentNode.setAttribute('data-error-visible', `${!status.isValid}`);
+    if (!status.isValid) {
+      this.formIsValid = false;
+      radio.parentNode.setAttribute('data-error', this.errorMessages.nochoice);
+    } else {
+      radio.checked = true;
+    }
+  };
+
+  /**
+   *
+   * @param {{}} status
+   */
   displayCheckBoxStatus = (status) => {
     const checkbox = document.getElementById(status.id);
     checkbox.checked = status.checked;
@@ -199,23 +214,6 @@ export default class FormView {
         'data-error',
         this.errorMessages.termsofuse
       );
-    }
-  };
-
-  // TODO : regrouper avec traitement text inputs
-  /**
-   *
-   * @param {{}} status
-   */
-  displayLocationStatus = (status) => {
-    const radio = document.getElementById(status.id);
-    radio.parentNode.setAttribute('data-error-visible', `${!status.isValid}`);
-    if (!status.isValid) {
-      this.formIsValid = false;
-      radio.parentNode.setAttribute('data-error-visible', 'true');
-      radio.parentNode.setAttribute('data-error', this.errorMessages.nochoice);
-    } else {
-      radio.checked = true;
     }
   };
 
