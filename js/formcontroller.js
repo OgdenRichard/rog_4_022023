@@ -33,7 +33,6 @@ export default class FormController {
   runForm = () => {
     this.view.bindOpenForm(this.model.checkLocalStorage);
     this.view.bindCloseForm(this.model.addInputStatus);
-    this.view.bindCloseTab(this.model.clearLocalStorage);
     this.view.clearInputError();
     this.view.bindSubmitForm(this.model.addInputStatus);
     this.view.bindClearLocalStorage(this.model.clearLocalStorage);
