@@ -142,6 +142,12 @@ header {
     margin-right: 0;
   }
 
+  .logo-container {
+    padding-left: 20px;
+    width: 80%;
+    flex-shrink: 1;
+  }
+
   .topnav a {
     display: none;
   }
@@ -150,6 +156,7 @@ header {
     display: block;
     width: 10%;
     padding-top: 0.25em;
+    padding-right: 20px;
     font-size: 1.75em;
   }
 
