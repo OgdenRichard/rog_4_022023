@@ -118,6 +118,21 @@ export default class FormView {
         this.removeDataError(input);
       });
     });
+    this.formTextInputs.forEach((input) => {
+      input.addEventListener('change', () => {
+        this.removeDataError(input);
+      });
+    });
+    this.locationsVals.forEach((input) => {
+      input.addEventListener('change', () => {
+        this.removeDataError(input);
+      });
+    });
+    this.checkboxes.forEach((input) => {
+      input.addEventListener('change', () => {
+        this.removeDataError(input);
+      });
+    });
   };
 
   /**

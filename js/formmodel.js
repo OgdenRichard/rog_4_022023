@@ -67,23 +67,26 @@ export default class FormModel {
   /**
    *
    * @param {string} inputStatus
-   * @returns {boolean}
+   * @returns {Boolean}
    */
   checkFirstName = (inputStatus) => this.namesPattern.test(inputStatus);
 
   /**
    *
    * @param {string} inputStatus
-   * @returns {boolean}
+   * @returns {Boolean}
    */
   checkEmail = (inputStatus) => this.emailPattern.test(inputStatus);
 
   /**
    *
    * @param {number} strNumber
-   * @returns {boolean}
+   * @returns {Boolean}
    */
-  checkNbOfTournaments = (strNumber) => parseInt(strNumber, 10) >= 0;
+  checkNbOfTournaments = (strNumber) => {
+    const numericAge = parseInt(strNumber, 10);
+    return numericAge >= 0 && numericAge <= 10;
+  };
 
   /**
    *
