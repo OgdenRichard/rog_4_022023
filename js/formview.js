@@ -3,6 +3,7 @@ export default class FormView {
    * @constructor
    */
   constructor() {
+    this.navbarBtn = document.getElementById('navbar-menu');
     this.modalBtn = document.querySelectorAll('.modal-btn');
     this.modalCloseBtn = document.getElementById('form-close');
     this.modalbg = document.querySelector('.bground');
@@ -21,7 +22,23 @@ export default class FormView {
       nochoice: 'Vous devez choisir un tournoi',
       termsofuse: 'Vous devez accepter les CGU',
     };
+    // initialization
+    this.displayDropdown();
   }
+
+  /**
+   * Displays / collapses navbar drowpdown
+   */
+  displayDropdown = () => {
+    this.navbarBtn.addEventListener('click', () => {
+      const x = document.getElementById('myTopnav');
+      if (x.className === 'topnav') {
+        x.className += ' responsive';
+      } else {
+        x.className = 'topnav';
+      }
+    });
+  };
 
   /**
    *
