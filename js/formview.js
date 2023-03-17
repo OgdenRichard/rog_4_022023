@@ -4,6 +4,7 @@ export default class FormView {
    */
   constructor() {
     this.navbarBtn = document.getElementById('navbar-menu');
+    this.topNav = document.getElementById('myTopnav');
     this.modalBtn = document.querySelectorAll('.modal-btn');
     this.modalCloseBtn = document.getElementById('form-close');
     this.modalbg = document.querySelector('.bground');
@@ -31,11 +32,10 @@ export default class FormView {
    */
   displayDropdown = () => {
     this.navbarBtn.addEventListener('click', () => {
-      const x = document.getElementById('myTopnav');
-      if (x.className === 'topnav') {
-        x.className += ' responsive';
+      if (this.topNav.className === 'topnav') {
+        this.topNav.className += ' responsive';
       } else {
-        x.className = 'topnav';
+        this.topNav.className = 'topnav';
       }
     });
   };
@@ -82,6 +82,7 @@ export default class FormView {
   bindOpenForm = (handler) => {
     this.modalBtn.forEach((btn) =>
       btn.addEventListener('click', () => {
+        this.topNav.className = 'topnav';
         handler();
         this.restoreForm();
         this.modalbg.style.display = 'block';
