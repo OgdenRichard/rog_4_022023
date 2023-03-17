@@ -5,6 +5,7 @@ export default class FormView {
   constructor() {
     this.navbarBtn = document.getElementById('navbar-menu');
     this.topNav = document.getElementById('myTopnav');
+    this.dropDown = document.getElementById('dropdown');
     this.modalBtn = document.querySelectorAll('.modal-btn');
     this.modalCloseBtn = document.getElementById('form-close');
     this.modalbg = document.querySelector('.bground');
@@ -25,7 +26,10 @@ export default class FormView {
     };
     // initialization
     this.displayDropdown();
+    this.displayActiveNavElement();
   }
+
+  // ----------------------------- navbar management ----------------------------- //
 
   /**
    * Displays / collapses navbar drowpdown
@@ -40,6 +44,20 @@ export default class FormView {
     });
   };
 
+  /**
+   * Changes active nav link on click
+   */
+  displayActiveNavElement = () => {
+    const dropdownElements = this.dropDown.getElementsByTagName('a');
+    for (let index = 0; index < dropdownElements.length; index += 1) {
+      dropdownElements[index].addEventListener('click', () => {
+        this.dropDown.querySelector('.active').classList.remove('active');
+        dropdownElements[index].className = 'active';
+      });
+    }
+  };
+
+  // ----------------------------- modal management ----------------------------- //
   /**
    *
    * @param {callback} handler
