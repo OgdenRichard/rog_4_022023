@@ -109,8 +109,7 @@ header {
 }
 
 .topnav a:hover {
-  background-color: #ff0000;
-  color: #ffffff;
+  color: #ff0000;
   border-radius: 15px;
 }
 
@@ -174,22 +173,20 @@ header {
     text-align: left;
   }
 
-  .topnav.responsive .main-navbar > .navbar-dropdown {
-    display: block;
-    display: flex;
-    flex-direction: column;
-    margin-top: 1em;
-    background: rgb(231, 231, 231);
-  }
-
   .main-navbar {
     flex-direction: column;
   }
+
+  .topnav.responsive .main-navbar > .navbar-dropdown {
+    display: block;
+    margin-top: 1em;
+    background: rgb(231, 231, 231);
+  }
 }
 
-@media screen and (max-width: 540px) {
-  .header-logo {
-    flex-shrink: 1;
+@media screen and (max-width: 350px) {
+  .logo-container {
+    padding-left: 0;
   }
 }
 
