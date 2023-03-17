@@ -18,8 +18,9 @@ export default class FormView {
       invalid: 'Valeur incorrecte pour ce champ',
       wrongname:
         'Ponctuation, tirets, chiffres et caractères spéciaux interdits',
-      wrongnumber: 'Veuillez choisir un nombre compris entre 0 et 10',
+      wrongemail: 'Veuillez saisir un email valide',
       wrongage: 'Vous devez avoir entre 7 et 77 ans pour participer',
+      wrongnumber: 'Veuillez choisir un nombre compris entre 0 et 10',
       required: 'Ce champ est requis',
       nochoice: 'Vous devez choisir un tournoi',
       termsofuse: 'Vous devez accepter les CGU',
@@ -267,6 +268,9 @@ export default class FormView {
         break;
       case 'last':
         message = this.errorMessages.wrongname;
+        break;
+      case 'email':
+        message = this.errorMessages.wrongemail;
         break;
       case 'birthdate':
         message = this.errorMessages.wrongage;
