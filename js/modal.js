@@ -2,4 +2,4 @@
 import FormController from './formcontroller.js';
 
 const modalController = new FormController();
-modalController.runForm();
+modalController.init();

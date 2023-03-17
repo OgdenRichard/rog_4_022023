@@ -27,6 +27,7 @@ export default class FormView {
     // initialization
     this.displayDropdown();
     this.displayActiveNavElement();
+    this.clearInputError();
   }
 
   // ----------------------------- navbar management ----------------------------- //

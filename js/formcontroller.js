@@ -30,10 +30,9 @@ export default class FormController {
   /**
    *
    */
-  runForm = () => {
+  init = () => {
     this.view.bindOpenForm(this.model.checkLocalStorage);
     this.view.bindCloseForm(this.model.addInputStatus);
-    this.view.clearInputError();
     this.view.bindSubmitForm(this.model.addInputStatus);
     this.view.bindClearLocalStorage(this.model.clearLocalStorage);
     this.model.bindNewInputStatus(this.setSingleInputStatus);
