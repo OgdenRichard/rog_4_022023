@@ -11,7 +11,8 @@ export default class FormModel {
   }
 
   /**
-   *
+   * Refresh input status after verification
+   * Binding is set in FormController
    * @param {callback} callback
    */
   bindNewInputStatus = (callback) => {
@@ -19,7 +20,8 @@ export default class FormModel {
   };
 
   /**
-   *
+   * Loads values from local storages to restore them in FormView
+   * Binding is set in FormController
    * @param {callback} callback
    */
   bindRestoreInputValues = (callback) => {
@@ -27,7 +29,7 @@ export default class FormModel {
   };
 
   /**
-   *
+   * Gets local storage input values if token exists
    */
   checkLocalStorage = () => {
     this.inputValuesStatus = [];
@@ -38,7 +40,7 @@ export default class FormModel {
   };
 
   /**
-   *
+   * Writes input values in local storage
    */
   commitLocalStorage = () => {
     window.localStorage.setItem(
@@ -48,7 +50,7 @@ export default class FormModel {
   };
 
   /**
-   *
+   * Gets local storage
    */
   getLocalStorage = () => {
     const storageValues = window.localStorage.getItem(this.localStorageKey);
@@ -58,28 +60,28 @@ export default class FormModel {
   };
 
   /**
-   *
+   * Removes input values from local storage
    */
   clearLocalStorage = () => {
     window.localStorage.removeItem(this.localStorageKey);
   };
 
   /**
-   *
+   * Checks names validity from regex pattern
    * @param {string} inputStatus
    * @returns {Boolean}
    */
-  checkFirstName = (inputStatus) => this.namesPattern.test(inputStatus);
+  checkName = (inputStatus) => this.namesPattern.test(inputStatus);
 
   /**
-   *
+   * Checks email validity from regex pattern
    * @param {string} inputStatus
    * @returns {Boolean}
    */
   checkEmail = (inputStatus) => this.emailPattern.test(inputStatus);
 
   /**
-   *
+   * Checks number validity
    * @param {number} strNumber
    * @returns {Boolean}
    */
@@ -89,7 +91,7 @@ export default class FormModel {
   };
 
   /**
-   *
+   * Checks date validity
    * @param {string} strDate
    * @returns {number|Boolean}
    */
@@ -104,7 +106,7 @@ export default class FormModel {
   };
 
   /**
-   *
+   * Checks age validity
    * @param {number} ageVal
    * @returns {Boolean}
    */
@@ -116,7 +118,8 @@ export default class FormModel {
   };
 
   /**
-   *
+   * Checks whether a checkbox has to be checked or not
+   * Sends result back to FormView through FormController
    * @param {Array} checkboxes
    */
   verifyCheckboxes = (checkboxes) => {
@@ -133,7 +136,8 @@ export default class FormModel {
   };
 
   /**
-   *
+   * Checks if any location has been chosen or not
+   * Sends result back to FormView through FormController
    * @param {Array} locations
    */
   verifyLocations = (locations) => {
@@ -150,7 +154,9 @@ export default class FormModel {
   };
 
   /**
-   *
+   * Processes text inputs
+   * Sends result back to FormView through FormController
+   * Number with exponent or float value will be converted to integer
    * @param {HTMLElement} textInputs
    */
   verifyTextInputs = (textInputs) => {
@@ -166,7 +172,7 @@ export default class FormModel {
       } else {
         switch (input.type) {
           case 'text':
-            inputStatus.isValid = this.checkFirstName(input.value);
+            inputStatus.isValid = this.checkName(input.value);
             break;
           case 'email':
             inputStatus.isValid = this.checkEmail(input.value);
@@ -190,7 +196,7 @@ export default class FormModel {
   };
 
   /**
-   *
+   * Checks all inputs and writes results in local storage
    * @param {Array} textInputs
    * @param {Array} locations
    * @param {Array} checkboxes
