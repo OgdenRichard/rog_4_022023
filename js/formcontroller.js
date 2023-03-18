@@ -12,7 +12,7 @@ export default class FormController {
   }
 
   /**
-   *
+   * Sets callback in FormView to process specific input
    * @param {{}} inputStatus
    */
   setSingleInputStatus = (inputStatus) => {
@@ -20,7 +20,7 @@ export default class FormController {
   };
 
   /**
-   *
+   * Sets callback in FormView to refill form with values from local storage
    * @param {Array} inputValuesStatus
    */
   setAllInputsStatus = (inputValuesStatus) => {
@@ -28,7 +28,9 @@ export default class FormController {
   };
 
   /**
-   *
+   * Runs form actions
+   * Binds FormView events to FormModel methods
+   * Sets callbacks from FormView for FormModel methods
    */
   init = () => {
     this.view.bindOpenForm(this.model.checkLocalStorage);
