@@ -84,8 +84,8 @@ export default class FormModel {
    * @returns {Boolean}
    */
   checkNbOfTournaments = (strNumber) => {
-    const numericAge = parseInt(strNumber, 10);
-    return numericAge >= 0 && numericAge <= 10;
+    const nbInt = parseInt(strNumber, 10);
+    return nbInt >= 0 && nbInt <= 10;
   };
 
   /**
@@ -96,7 +96,7 @@ export default class FormModel {
   checkDate = (strDate) => {
     const inputDate = new Date(strDate);
     const todayDate = new Date();
-    if (!isNaN(inputDate.getTime()) && todayDate > inputDate) {
+    if (!Number.isNaN(inputDate.getTime()) && todayDate > inputDate) {
       const datesDiff = new Date(todayDate - inputDate);
       return datesDiff.getUTCFullYear() - 1970;
     }
@@ -176,6 +176,9 @@ export default class FormModel {
             break;
           case 'number':
             inputStatus.isValid = this.checkNbOfTournaments(input.value);
+            if (inputStatus.isValid) {
+              inputStatus.value = parseInt(input.value, 10).toString();
+            }
             break;
           default:
             break;
