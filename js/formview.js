@@ -60,10 +60,11 @@ export default class FormView {
   };
 
   // ----------------------------- modal management ----------------------------- //
+
   /**
-   *
+   * Sends every input to FormModel for validation
+   * Closes form and opens completion modal if all fields are ok
    * @param {callback} handler
-   *
    */
   bindSubmitForm = (handler) => {
     this.modalForm.addEventListener('submit', (event) => {
@@ -78,6 +79,8 @@ export default class FormView {
   };
 
   /**
+   * Closes form and checks inputs values
+   * Values are saved in Local storage whether ok or not
    * @param {callback} handler
    */
   bindCloseForm = (handler) => {
@@ -96,7 +99,7 @@ export default class FormView {
   };
 
   /**
-   *
+   * Opens form and loads input values
    * @param {callback} handler
    */
   bindOpenForm = (handler) => {
@@ -111,7 +114,8 @@ export default class FormView {
   };
 
   /**
-   *
+   * Clears local storage if form is valid
+   * Calls FormModel method through FormController
    * @param {callback} handler
    */
   bindClearLocalStorage = (callback) => {
@@ -119,7 +123,7 @@ export default class FormView {
   };
 
   /**
-   *
+   * Fills form with values from Local storage
    * @param {Array} inputValuesStatus
    */
   fillForm = (inputValuesStatus) => {
@@ -129,7 +133,7 @@ export default class FormView {
   };
 
   /**
-   *
+   * Restores empty form after completion
    */
   restoreForm = () => {
     if (!document.getElementById('reserve')) {
@@ -140,7 +144,7 @@ export default class FormView {
   };
 
   /**
-   *
+   * Wipes out old input values from form
    */
   clearForm = () => {
     this.formTextInputs.forEach((input) => {
@@ -156,7 +160,7 @@ export default class FormView {
   };
 
   /**
-   *
+   * Clear error messages and error display
    */
   clearInputError = () => {
     this.formTextInputs.forEach((input) => {
@@ -182,7 +186,7 @@ export default class FormView {
   };
 
   /**
-   *
+   * Displays input status and error message if necessary
    * @param {{}} status
    */
   displayInputStatus = (status) => {
@@ -204,7 +208,7 @@ export default class FormView {
   };
 
   /**
-   *
+   * Handles text inputs
    * @param {{}} status
    */
   displayTextStatus = (status) => {
@@ -221,7 +225,7 @@ export default class FormView {
   };
 
   /**
-   *
+   * Handles radio inputs
    * @param {{}} status
    */
   displayLocationStatus = (status) => {
@@ -236,7 +240,7 @@ export default class FormView {
   };
 
   /**
-   *
+   * Handles checkbox inputs
    * @param {{}} status
    */
   displayCheckBoxStatus = (status) => {
@@ -256,7 +260,7 @@ export default class FormView {
   };
 
   /**
-   *
+   * Manages specific error messages
    * @param {string} id
    * @returns {string}
    */
@@ -286,7 +290,7 @@ export default class FormView {
   };
 
   /**
-   *
+   * Clears error display
    * @param {HTMLElement} input
    */
   removeDataError = (input) => {
@@ -300,7 +304,7 @@ export default class FormView {
   };
 
   /**
-   *
+   * Builds completion modal after form validation
    */
   setCompletionModal = () => {
     const formBtn = this.modalForm
