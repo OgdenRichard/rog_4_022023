@@ -123,6 +123,17 @@ export default class FormView {
   };
 
   /**
+   * Clears local storage on close tab or page reload
+   * @param {callback} handler
+   */
+  bindBeforeUnload = (handler) => {
+    window.addEventListener('beforeunload', (event) => {
+      event.preventDefault();
+      handler();
+    });
+  };
+
+  /**
    * Fills form with values from Local storage
    * @param {Array} inputValuesStatus
    */
