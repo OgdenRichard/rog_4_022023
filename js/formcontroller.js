@@ -37,7 +37,7 @@ export default class FormController {
     this.view.bindCloseForm(this.model.addInputStatus);
     this.view.bindSubmitForm(this.model.addInputStatus);
     this.view.bindClearLocalStorage(this.model.clearLocalStorage);
-    this.view.bindBeforeUnload(this.model.clearLocalStorage);
+    this.view.bindOnUnload(this.model.clearLocalStorage);
     this.model.bindNewInputStatus(this.setSingleInputStatus);
     this.model.bindRestoreInputValues(this.setAllInputsStatus);
   };

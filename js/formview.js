@@ -29,6 +29,7 @@ export default class FormView {
     this.displayDropdown();
     this.displayActiveNavElement();
     this.clearInputError();
+    this.beforeUnload();
   }
 
   // ----------------------------- navbar management ----------------------------- //
@@ -126,10 +127,20 @@ export default class FormView {
    * Clears local storage on close tab or page reload
    * @param {callback} handler
    */
-  bindBeforeUnload = (handler) => {
+  bindOnUnload = (handler) => {
+    window.addEventListener('unload', () => {
+      handler();
+    });
+  };
+
+  /**
+   * Displays navigator alert before close tab or page reload
+   * @param {callback} handler
+   */
+  beforeUnload = () => {
     window.addEventListener('beforeunload', (event) => {
       event.preventDefault();
-      handler();
+      event.returnValue = '';
     });
   };
 
