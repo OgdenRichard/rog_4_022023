@@ -12,10 +12,34 @@ export default class FormController {
   }
 
   /**
+   * Sets callback in FormModel to read local storage
+   */
+  handleOpenForm = () => {
+    this.model.checkLocalStorage();
+  };
+
+  /**
+   * Sets callback in FormModel to process inputs data
+   * @param {Array} textInputs
+   * @param {Array} locations
+   * @param {Array} checkboxes
+   */
+  handleSubmitOrCloseForm = (textInputs, locations, checkboxes) => {
+    this.model.addInputStatus(textInputs, locations, checkboxes);
+  };
+
+  /**
+   * Sets callback in FormModel to reset local storage
+   */
+  handleFormReset = () => {
+    this.model.clearLocalStorage();
+  };
+
+  /**
    * Sets callback in FormView to process specific input
    * @param {{}} inputStatus
    */
-  setSingleInputStatus = (inputStatus) => {
+  onSingleInputStatusChanged = (inputStatus) => {
     this.view.displayInputStatus(inputStatus);
   };
 
@@ -23,7 +47,7 @@ export default class FormController {
    * Sets callback in FormView to refill form with values from local storage
    * @param {Array} inputValuesStatus
    */
-  setAllInputsStatus = (inputValuesStatus) => {
+  onAllInputStatusChanged = (inputValuesStatus) => {
     this.view.fillForm(inputValuesStatus);
   };
 
@@ -33,12 +57,11 @@ export default class FormController {
    * Sets callbacks from FormView for FormModel methods
    */
   init = () => {
-    this.view.bindOpenForm(this.model.checkLocalStorage);
-    this.view.bindCloseForm(this.model.addInputStatus);
-    this.view.bindSubmitForm(this.model.addInputStatus);
-    this.view.bindClearLocalStorage(this.model.clearLocalStorage);
-    this.view.bindOnUnload(this.model.clearLocalStorage);
-    this.model.bindNewInputStatus(this.setSingleInputStatus);
-    this.model.bindRestoreInputValues(this.setAllInputsStatus);
+    this.view.bindOpenForm(this.handleOpenForm);
+    this.view.bindCloseForm(this.handleSubmitOrCloseForm);
+    this.view.bindSubmitForm(this.handleSubmitOrCloseForm);
+    this.view.bindClearFormData(this.handleFormReset);
+    this.model.bindNewInputStatus(this.onSingleInputStatusChanged);
+    this.model.bindRestoreInputValues(this.onAllInputStatusChanged);
   };
 }

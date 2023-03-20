@@ -30,6 +30,7 @@ export default class FormView {
     this.displayActiveNavElement();
     this.clearInputError();
     this.beforeUnload();
+    this.resetFormOnUnload();
   }
 
   // ----------------------------- navbar management ----------------------------- //
@@ -73,7 +74,7 @@ export default class FormView {
       this.formIsValid = true;
       handler(this.formTextInputs, this.locationsVals, this.checkboxes);
       if (this.formIsValid) {
-        this.onValidForm();
+        this.wipeFormData();
         this.setCompletionModal();
       }
     });
@@ -119,17 +120,16 @@ export default class FormView {
    * Calls FormModel method through FormController
    * @param {callback} handler
    */
-  bindClearLocalStorage = (callback) => {
-    this.onValidForm = callback;
+  bindClearFormData = (callback) => {
+    this.wipeFormData = callback;
   };
 
   /**
    * Clears local storage on close tab or page reload
-   * @param {callback} handler
    */
-  bindOnUnload = (handler) => {
+  resetFormOnUnload = () => {
     window.addEventListener('unload', () => {
-      handler();
+      this.wipeFormData();
     });
   };
 
