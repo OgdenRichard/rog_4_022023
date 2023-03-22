@@ -100,6 +100,7 @@ export default class FormModel {
     const todayDate = new Date();
     if (!Number.isNaN(inputDate.getTime()) && todayDate > inputDate) {
       const datesDiff = new Date(todayDate - inputDate);
+      console.log(datesDiff.getUTCFullYear());
       return datesDiff.getUTCFullYear() - 1970;
     }
     return false;
