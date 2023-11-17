@@ -12,7 +12,7 @@ export default class FormModel {
 
   /**
    * Refresh input status after verification
-   * Binding is set in FormController
+   * Binding is set in FormControllr
    * @param {callback} callback
    */
   bindNewInputStatus = (callback) => {
